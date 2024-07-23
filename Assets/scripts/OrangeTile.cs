@@ -27,7 +27,7 @@ public class OrangeTile : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        
+        Debug.Log("Something exited the tile: " + other.name);
     }
 
     private bool IsStandingVertically(Collider other)
@@ -44,5 +44,6 @@ public class OrangeTile : MonoBehaviour
     {
         Debug.Log("Orange Tile Broken!");
         gameObject.SetActive(false); // Disable the tile to simulate breaking
+        Destroy(gameObject); // Destroy the tile to remove it from the hierarchy
     }
 }
