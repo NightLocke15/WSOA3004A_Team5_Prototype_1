@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     #region Booleans
-    [SerializeField] private bool upright = true; //Tells if block is standing up of laying sideways
+    public bool upright = true; //Tells if block is standing up of laying sideways
     [SerializeField] private bool left = false; //True if the last direction block went into is this direction
     [SerializeField] private bool right = false; // " "
     [SerializeField] private bool front = true; // " "
@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float speed = 3; //Speed of the block rolling
     private float currentY; //What the block Y position is in the world. Helps determine if block is upright or not
     [SerializeField] private List<string> strings = new List<string>(); //List that contains string that tells what the previous state was, upright or not
+    private string state;
     #endregion
 
     private void Update()
