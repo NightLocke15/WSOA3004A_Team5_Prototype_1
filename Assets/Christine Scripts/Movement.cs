@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float speed = 3;
-    private bool _moving;
-    private float currentY;
-    [SerializeField] private float currentZRot;
-    [SerializeField] private float currentXRot;
-    [SerializeField] private bool upright = true;
-    [SerializeField] private bool left = false;
-    [SerializeField] private bool right = false;
-    [SerializeField] private bool front = true;
-    [SerializeField] private bool back = false;
-    public bool touchingFloor;
-    [SerializeField] private KeyCode lastKey;
+    #region Booleans
+    [SerializeField] private bool upright = true; //Tells if block is standing up of laying sideways
+    [SerializeField] private bool left = false; //True if the last direction block went into is this direction
+    [SerializeField] private bool right = false; // " "
+    [SerializeField] private bool front = true; // " "
+    [SerializeField] private bool back = false; // " "
+    public bool touchingFloor; //Tells if Raycast is touching the floor or not
+    private bool _moving; //Telle is block is moving or not
+    #endregion
 
-    [SerializeField] private List<string> strings = new List<string>();
+    #region Misc
+    [SerializeField] private float speed = 3; //Speed of the block rolling
+    private float currentY; //What the block Y position is in the world. Helps determine if block is upright or not
+    [SerializeField] private List<string> strings = new List<string>(); //List that contains string that tells what the previous state was, upright or not
+    #endregion
 
     private void Update()
     {
         currentY = transform.position.y;
-        currentZRot = transform.eulerAngles.z - 180;
-        currentXRot = transform.eulerAngles.x - 180;
+
+        //Determine whether block is standing or not
 
         if (currentY > 0.8f && currentY < 1.2f)
         {
@@ -38,6 +39,8 @@ public class Movement : MonoBehaviour
         {
             return;
         }
+
+        //Movement tied to WASD
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -56,76 +59,52 @@ public class Movement : MonoBehaviour
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.left);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.left);
+                        DirectionTwo(Vector3.left);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.left) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.left);
+                        DirectionOne(Vector3.left);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (right == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.left);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.left);
+                        DirectionTwo(Vector3.left);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.left) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.left);
+                        DirectionOne(Vector3.left);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (front == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.left) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.left);
+                        DirectionOne(Vector3.left);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.left);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.left);
+                        DirectionTwo(Vector3.left);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (back == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.left) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.left);
+                        DirectionOne(Vector3.left);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.left);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.left);
+                        DirectionTwo(Vector3.left);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
             }
@@ -153,76 +132,52 @@ public class Movement : MonoBehaviour
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.right);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.right);
+                        DirectionTwo(Vector3.right);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.right) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.right);
+                        DirectionOne(Vector3.right);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (right == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.right);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.right);
+                        DirectionTwo(Vector3.right);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.right) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.right);
+                        DirectionOne(Vector3.right);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (front == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.right) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.right);
+                        DirectionOne(Vector3.right);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.right);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.right);
+                        DirectionTwo(Vector3.right);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (back == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.right) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.right);
+                        DirectionOne(Vector3.right);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.right);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.right);
+                        DirectionTwo(Vector3.right);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
             }
@@ -249,76 +204,52 @@ public class Movement : MonoBehaviour
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.forward) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.forward);
+                        DirectionOne(Vector3.forward);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.forward);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.forward);
+                        DirectionTwo(Vector3.forward);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (right == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.forward) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.forward);
+                        DirectionOne(Vector3.forward);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.forward);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.forward);
+                        DirectionTwo(Vector3.forward);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (front == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.forward);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.forward);
+                        DirectionTwo(Vector3.forward);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.forward) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.forward);
+                        DirectionOne(Vector3.forward);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (back == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.forward);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.forward);
+                        DirectionTwo(Vector3.forward);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.forward) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.forward);
+                        DirectionOne(Vector3.forward);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
             }
@@ -345,76 +276,52 @@ public class Movement : MonoBehaviour
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.back) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.back);
+                        DirectionOne(Vector3.back);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.back);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.back);
+                        DirectionTwo(Vector3.back);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (right == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.back) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.back);
+                        DirectionOne(Vector3.back);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.back);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.back);
+                        DirectionTwo(Vector3.back);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (front == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.back);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.back);
+                        DirectionTwo(Vector3.back);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.back) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.back);
+                        DirectionOne(Vector3.back);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
                 else if (back == true)
                 {
                     if (strings[strings.Count - 1] != strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + ((Vector3.down * 0.5f) + Vector3.back);
-                        var axis = Vector3.Cross(Vector3.up, Vector3.back);
+                        DirectionTwo(Vector3.back);
                         strings.Add("upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                     else if (strings[strings.Count - 1] == strings[strings.Count - 2])
                     {
-                        var anchor = transform.position + (Vector3.down + Vector3.back) * 0.5f;
-                        var axis = Vector3.Cross(Vector3.up, Vector3.back);
+                        DirectionOne(Vector3.back);
                         strings.Add("not upright");
-
-                        StartCoroutine(Rolling(anchor, axis));
                     }
                 }
             }
@@ -424,6 +331,22 @@ public class Movement : MonoBehaviour
             front = false;
             back = true;
         }     
+
+        void DirectionOne (Vector3 direction)
+        {
+            var anchor = transform.position + (Vector3.down + direction) * 0.5f;
+            var axis = Vector3.Cross(Vector3.up, direction);
+
+            StartCoroutine(Rolling(anchor, axis));
+        }
+
+        void DirectionTwo(Vector3 direction)
+        {
+            var anchor = transform.position + ((Vector3.down * 0.5f) + direction);
+            var axis = Vector3.Cross(Vector3.up, direction);
+
+            StartCoroutine(Rolling(anchor, axis));
+        }
     }
 
     IEnumerator Rolling(Vector3 anchor, Vector3 axis)
