@@ -2,10 +2,39 @@ using UnityEngine;
 
 public class SoftSwitch : MonoBehaviour
 {
-    public ActivatableObject activatableObject;
-    private bool playerExited = false; // Track if the player has exited the tile
+   // public ActivatableObject activatableObject;
+    //private bool playerExited = false; // Track if the player has exited the tile
+    Movement _movement;
+    public GameObject platformSoft;
+    private int activate = 0;
 
-    void OnTriggerStay(Collider other)
+    private void Start()
+    {
+        _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
+        platformSoft.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (activate % 2 == 0)
+        {
+            platformSoft.SetActive(false);
+        }
+        else if (activate % 2 == 1)
+        {
+            platformSoft.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "HalfCube")
+        {
+            activate++;
+        }
+    }
+
+    /*void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -42,5 +71,5 @@ public class SoftSwitch : MonoBehaviour
 
         Debug.Log($"Tile Bounds: {tileBounds}, Player Bounds: {playerBounds}, Is Fully Covering: {isFullyCovering}");
         return isFullyCovering;
-    }
+    }*/
 }

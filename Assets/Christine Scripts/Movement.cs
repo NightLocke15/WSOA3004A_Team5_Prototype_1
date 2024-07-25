@@ -6,19 +6,20 @@ public class Movement : MonoBehaviour
 {
     #region Booleans
     public bool upright = true; //Tells if block is standing up of laying sideways
-    [SerializeField] private bool left = false; //True if the last direction block went into is this direction
-    [SerializeField] private bool right = false; // " "
-    [SerializeField] private bool front = true; // " "
-    [SerializeField] private bool back = false; // " "
+    public bool left = false; //True if the last direction block went into is this direction
+    public bool right = false; // " "
+    public bool front = true; // " "
+    public bool back = false; // " "
     public bool touchingFloor; //Tells if Raycast is touching the floor or not
-    private bool _moving; //Telle is block is moving or not
+    public bool _moving; //Telle is block is moving or not
     #endregion
 
     #region Misc
     [SerializeField] private float speed = 3; //Speed of the block rolling
     private float currentY; //What the block Y position is in the world. Helps determine if block is upright or not
-    [SerializeField] private List<string> strings = new List<string>(); //List that contains string that tells what the previous state was, upright or not
+    public List<string> strings = new List<string>(); //List that contains string that tells what the previous state was, upright or not
     private string state;
+    public GameObject cube;
     #endregion
 
     private void Update()
