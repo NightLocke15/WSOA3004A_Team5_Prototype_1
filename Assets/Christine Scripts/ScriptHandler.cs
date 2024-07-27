@@ -10,8 +10,6 @@ public class ScriptHandler : MonoBehaviour
 
     private void Start()
     {
-        movementCube1 = GameObject.Find("Half One").GetComponent<SmallMovement>();
-        movementCube2 = GameObject.Find("Half Two").GetComponent<SmallMovement>();
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
 
         movementCube1.enabled = false;

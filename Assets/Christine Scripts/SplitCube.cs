@@ -29,7 +29,11 @@ public class SplitCube : MonoBehaviour
             cubeOne.SetActive(true);
             cubeTwo.SetActive(true);
 
-            cubeOne.transform.position = playerCube.transform.position + new Vector3(0, -0.5f, 0);
+            float x = Mathf.Round(playerCube.transform.position.x * 2f) / 2f;
+            float z = Mathf.Round(playerCube.transform.position.z * 2f) / 2f;
+
+
+            cubeOne.transform.position = new Vector3(x, 0.5f, z);
 
             _scriptHandler.movementCube1.enabled = true;
         }

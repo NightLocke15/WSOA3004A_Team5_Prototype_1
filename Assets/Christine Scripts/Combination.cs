@@ -7,6 +7,12 @@ public class Combination : MonoBehaviour
     public GameObject cubeOne;
     public GameObject cubeTwo;
     public GameObject playerCube;
+    Movement _movement;
+
+    private void Start()
+    {
+        _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,7 +27,12 @@ public class Combination : MonoBehaviour
 
                 playerCube.transform.position = cubeOne.transform.position + new Vector3(0, 0, 0.5f);
                 playerCube.transform.rotation = Quaternion.Euler(90, 0, 0);
-
+                _movement.strings.Add("not upright");
+                _movement._moving = false;
+                _movement.front = true;
+                _movement.back = false;
+                _movement.left = false;
+                _movement.right = false;
             }
             else if (cubeOne.transform.position.z > (cubeTwo.transform.position.z + 0.2))
             {
@@ -32,6 +43,12 @@ public class Combination : MonoBehaviour
 
                 playerCube.transform.position = cubeOne.transform.position + new Vector3(0, 0, -0.5f);
                 playerCube.transform.rotation = Quaternion.Euler(90, 0, 0);
+                _movement.strings.Add("not upright");
+                _movement._moving = false;
+                _movement.front = true;
+                _movement.back = false;
+                _movement.left = false;
+                _movement.right = false;
             }
             else if (cubeOne.transform.position.x < (cubeTwo.transform.position.x - 0.2)) // left and right
             {
@@ -42,6 +59,12 @@ public class Combination : MonoBehaviour
 
                 playerCube.transform.position = cubeOne.transform.position + new Vector3(0.5f, 0, 0);
                 playerCube.transform.rotation = Quaternion.Euler(0, 0, 90);
+                _movement.strings.Add("not upright");
+                _movement._moving = false;
+                _movement.front = false;
+                _movement.back = false;
+                _movement.left = true;
+                _movement.right = false;
             }
             else if (cubeOne.transform.position.x > (cubeTwo.transform.position.x + 0.2))
             {
@@ -52,6 +75,12 @@ public class Combination : MonoBehaviour
 
                 playerCube.transform.position = cubeOne.transform.position + new Vector3(-0.5f, 0, 0);
                 playerCube.transform.rotation = Quaternion.Euler(0, 0, 90);
+                _movement.strings.Add("not upright");
+                _movement._moving = false;
+                _movement.front = false;
+                _movement.back = false;
+                _movement.left = true;
+                _movement.right = false;
             }
         }
     }
