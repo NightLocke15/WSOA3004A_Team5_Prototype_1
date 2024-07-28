@@ -9,10 +9,10 @@ public class SoftSwitch : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("On O Tile: Checking if fully covering");
+           
             if (IsFullyCovering(other))
             {
-                Debug.Log("Player fully covers the O Tile");
+               
                 if (playerExited) // Check if the player has exited before reentering
                 {
                     activatableObject.Toggle();
@@ -40,7 +40,7 @@ public class SoftSwitch : MonoBehaviour
                                playerBounds.min.z <= tileBounds.min.z &&
                                playerBounds.max.z >= tileBounds.max.z;
 
-        Debug.Log($"Tile Bounds: {tileBounds}, Player Bounds: {playerBounds}, Is Fully Covering: {isFullyCovering}");
+       
         return isFullyCovering;
     }
 }

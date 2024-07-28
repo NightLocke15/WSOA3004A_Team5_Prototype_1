@@ -10,7 +10,8 @@ public class SplitCube : MonoBehaviour
     public GameObject cubeTwo;
     public GameObject playerCube;
 
-    
+    private AudioSource audioSource; // Reference to the AudioSource component
+
 
     private void Start()
     {
@@ -18,6 +19,8 @@ public class SplitCube : MonoBehaviour
         _scriptHandler = GameObject.Find("Script Handler").GetComponent<ScriptHandler>();
         cubeOne.SetActive(false);
         cubeTwo.SetActive(false);        
+
+        audioSource = GetComponent<AudioSource>(); // Initialize the AudioSource
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,6 +39,11 @@ public class SplitCube : MonoBehaviour
             cubeOne.transform.position = new Vector3(x, 0.5f, z);
 
             _scriptHandler.movementCube1.enabled = true;
+            // Play the split sound
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
         }
     }
 }

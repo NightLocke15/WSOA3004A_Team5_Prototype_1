@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Movement : MonoBehaviour
 {
     #region Booleans
@@ -20,7 +20,20 @@ public class Movement : MonoBehaviour
     public List<string> strings = new List<string>(); //List that contains string that tells what the previous state was, upright or not
     private string state;
     public GameObject cube;
+     private AudioSource audioSource; // Reference to the AudioSource component
+     // Add a reference to the UI Text component
+   // Add a reference to the TMP Text component
+    public TMP_Text moveCounterText;
+
+    // Add a variable to keep track of the number of moves
+    private int moveCounter = 0;
     #endregion
+
+private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+         UpdateMoveCounterUI(); // Initialize the UI with the starting number of moves
+    }
 
     private void Update()
     {
@@ -354,6 +367,8 @@ public class Movement : MonoBehaviour
     IEnumerator Rolling(Vector3 anchor, Vector3 axis)
     {
         _moving = true;
+        // Play the movement sound
+        audioSource.Play();
 
         for (int i = 0; i < (90 / speed); i++)
         {
@@ -362,5 +377,16 @@ public class Movement : MonoBehaviour
         }
 
         _moving = false;
+     // Increase the move counter and update the UI
+        moveCounter++;
+        UpdateMoveCounterUI();
+    }
+
+    private void UpdateMoveCounterUI()
+    {
+        if (moveCounterText != null)
+        {
+            moveCounterText.text = "Moves: " + moveCounter;
+        }
     }
 }
