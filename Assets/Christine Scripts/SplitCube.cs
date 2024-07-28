@@ -9,7 +9,7 @@ public class SplitCube : MonoBehaviour
     public GameObject cubeOne;
     public GameObject cubeTwo;
     public GameObject playerCube;
-
+    public ParticleSystem splitParticle;
     
 
     private void Start()
@@ -36,6 +36,7 @@ public class SplitCube : MonoBehaviour
             cubeOne.transform.position = new Vector3(x, 0.5f, z);
 
             _scriptHandler.movementCube1.enabled = true;
+            splitParticle.Play();
         }
     }
 }

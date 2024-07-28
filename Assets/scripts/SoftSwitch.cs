@@ -7,6 +7,7 @@ public class SoftSwitch : MonoBehaviour
     Movement _movement;
     public GameObject platformSoft;
     private int activate = 0;
+    public ParticleSystem softParticle;
 
     private void Start()
     {
@@ -31,6 +32,7 @@ public class SoftSwitch : MonoBehaviour
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "HalfCube")
         {
             activate++;
+            softParticle.Play();
         }
     }
 

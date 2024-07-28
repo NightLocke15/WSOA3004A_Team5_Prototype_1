@@ -7,11 +7,12 @@ public class HardSwitch : MonoBehaviour
     Movement _movement;
     public GameObject platformHard;
     private int activate = 0;
+    public ParticleSystem hardParticle;
 
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
-        platformHard.SetActive(false);
+        platformHard.SetActive(false);   
     }
 
     private void Update()
@@ -31,6 +32,7 @@ public class HardSwitch : MonoBehaviour
         if (other.gameObject.tag == "Player" && _movement.upright == true)
         {
             activate++;
+            hardParticle.Play();
         }
     }
 
