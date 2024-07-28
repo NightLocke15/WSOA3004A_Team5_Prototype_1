@@ -9,11 +9,20 @@ public class UIManager : MonoBehaviour
     public Button exitButton;
     public Button levelsButton;
     public GameObject levelSelectionPanel;
+    public AudioClip buttonClickSound; // The sound to play on button click
 
     private Button[] levelButtons;
+    private AudioSource audioSource;
 
     void Start()
     {
+        // Initialize AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        if (buttonClickSound != null)
+        {
+            audioSource.clip = buttonClickSound;
+        }
+
         levelSelectionPanel.SetActive(false);
         startButton.Select();
 
@@ -21,6 +30,11 @@ public class UIManager : MonoBehaviour
         startButton.onClick.AddListener(StartGame);
         exitButton.onClick.AddListener(ExitGame);
         levelsButton.onClick.AddListener(OpenLevelSelection);
+
+        // Add listeners for playing sound
+        startButton.onClick.AddListener(PlayButtonClickSound);
+        exitButton.onClick.AddListener(PlayButtonClickSound);
+        levelsButton.onClick.AddListener(PlayButtonClickSound);
 
         // Add debug logs
         startButton.onClick.AddListener(() => Debug.Log("Start button clicked"));
@@ -65,6 +79,7 @@ public class UIManager : MonoBehaviour
         {
             button.onClick.AddListener(() => Debug.Log(button.name + " clicked"));
             button.onClick.AddListener(() => LoadLevel(button.name)); // Assuming button name is the level name
+            button.onClick.AddListener(PlayButtonClickSound); // Add sound listener
         }
     }
 
@@ -93,5 +108,13 @@ public class UIManager : MonoBehaviour
         // Load the selected level scene
         Debug.Log("Loading level: " + levelName);
         SceneManager.LoadScene(levelName);
+    }
+
+    private void PlayButtonClickSound()
+    {
+        if (audioSource != null && buttonClickSound != null)
+        {
+            audioSource.PlayOneShot(buttonClickSound);
+        }
     }
 }
