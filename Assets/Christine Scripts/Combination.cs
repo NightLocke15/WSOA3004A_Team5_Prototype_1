@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Combination : MonoBehaviour
@@ -9,15 +8,45 @@ public class Combination : MonoBehaviour
     public GameObject playerCube;
     Movement _movement;
 
+    public AudioClip combineSound; // Audio clip for the combination sound
+    public GameObject soundPlayer; // Reference to the GameObject that will play the sound
+
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
+        if (soundPlayer == null)
+        {
+            Debug.LogError("Sound Player GameObject is not assigned!");
+        }
+    }
+
+    private void PlayCombineSound()
+    {
+        if (soundPlayer != null && combineSound != null)
+        {
+            AudioSource audioSource = soundPlayer.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.clip = combineSound;
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("AudioSource component is missing on the Sound Player GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Sound Player or Combine Sound is not assigned.");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "HalfCube")
         {
+            PlayCombineSound(); // Play the reconnect sound before changing states
+
             if (cubeOne.transform.position.z < (cubeTwo.transform.position.z - 0.2)) // forward and back
             {
                 Debug.Log("front");

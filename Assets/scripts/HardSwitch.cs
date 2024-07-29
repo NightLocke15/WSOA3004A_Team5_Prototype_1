@@ -2,10 +2,39 @@ using UnityEngine;
 
 public class HardSwitch : MonoBehaviour
 {
-    public ActivatableObject activatableObject;
-    private bool playerExited = false; // Track if the player has exited the tile
+    //public ActivatableObject activatableObject;
+    //private bool playerExited = false; // Track if the player has exited the tile
+    Movement _movement;
+    public GameObject platformHard;
+    private int activate = 0;
 
-    void OnTriggerStay(Collider other)
+    private void Start()
+    {
+        _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
+        platformHard.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (activate % 2 == 0)
+        {
+            platformHard.SetActive(false);
+        }
+        else if (activate % 2 == 1)
+        {
+            platformHard.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && _movement.upright == true)
+        {
+            activate++;
+        }
+    }
+
+   /* void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -44,5 +73,5 @@ public class HardSwitch : MonoBehaviour
 
         Debug.Log($"Tile Bounds: {tileBounds}, Player Bounds: {playerBounds}, Is Fully Covering: {isFullyCovering}, Is Standing Vertically: {isStandingVertically}");
         return isFullyCovering && isStandingVertically;
-    }
+    }*/
 }
