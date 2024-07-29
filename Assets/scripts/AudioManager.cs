@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  {
+    public AudioClip backgroundMusic; // Assign this in the Inspector
+    private AudioSource audioSource;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        // Add an AudioSource component if it doesn't exist
+        audioSource = gameObject.GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Assign the background music and play it
+        if (backgroundMusic != null)
+        {
+            audioSource.clip = backgroundMusic;
+            audioSource.loop = true; // Loop the background music
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Background music not assigned in " + gameObject.name);
+        }
     }
 }

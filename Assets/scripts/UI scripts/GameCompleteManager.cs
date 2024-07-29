@@ -6,12 +6,21 @@ public class GameCompleteManager : MonoBehaviour
 {
     public Button mainMenuButton;
     public Button exitButton;
+    public AudioClip buttonClickSound; // The sound to play on button click
 
     private Button[] buttons;
     private int selectedButtonIndex = 0;
+    private AudioSource audioSource;
 
     void Start()
     {
+        // Initialize AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        if (buttonClickSound != null)
+        {
+            audioSource.clip = buttonClickSound;
+        }
+
         // Array of buttons for easy navigation
         buttons = new Button[] { mainMenuButton, exitButton };
 
@@ -21,6 +30,10 @@ public class GameCompleteManager : MonoBehaviour
         // Assign button listeners
         mainMenuButton.onClick.AddListener(BackToMainMenu);
         exitButton.onClick.AddListener(ExitGame);
+
+        // Add listeners for playing sound
+        mainMenuButton.onClick.AddListener(PlayButtonClickSound);
+        exitButton.onClick.AddListener(PlayButtonClickSound);
     }
 
     void Update()
@@ -66,5 +79,13 @@ public class GameCompleteManager : MonoBehaviour
         // Exit the application
         Application.Quit();
         Debug.Log("Exiting Game");
+    }
+
+    private void PlayButtonClickSound()
+    {
+        if (audioSource != null && buttonClickSound != null)
+        {
+            audioSource.PlayOneShot(buttonClickSound);
+        }
     }
 }
