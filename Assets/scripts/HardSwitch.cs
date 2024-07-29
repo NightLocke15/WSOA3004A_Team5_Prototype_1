@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HardSwitch : MonoBehaviour
@@ -8,22 +10,33 @@ public class HardSwitch : MonoBehaviour
     public GameObject platformHard;
     private int activate = 0;
     public ParticleSystem hardParticle;
+    public List<GameObject> switches = new List<GameObject>();
+
+    public LevelData _levelData;
+    public LevelManager _levelManager;
 
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
-        platformHard.SetActive(false);   
+        _levelManager = GameObject.Find("Manager").GetComponent<LevelManager>();
     }
 
     private void Update()
     {
-        if (activate % 2 == 0)
+        _levelData = _levelManager.levels[_levelManager.currentLevelIndex];
+
+        for (int i = 0; i < _levelData.tiles.Length; i++)
         {
-            platformHard.SetActive(false);
-        }
-        else if (activate % 2 == 1)
-        {
-            platformHard.SetActive(true);
+            if (_levelData.tiles[i].tileType == TileType.hardTile && switches.Count < 2)
+            {
+                GameObject tile = GameObject.Find("tile" + i);
+                switches.Add(tile);
+
+                for (int j = 0; j < switches.Count; j++)
+                {
+                    switches[j].SetActive(false);
+                }
+            }
         }
     }
 
@@ -33,6 +46,23 @@ public class HardSwitch : MonoBehaviour
         {
             activate++;
             hardParticle.Play();
+
+            if (activate % 2 == 1)
+            {
+                for (int j = 0; j < switches.Count; j++)
+                {
+                    switches[j].SetActive(true);
+                }
+                platformHard.SetActive(false);
+            }
+            else if (activate % 2 == 0)
+            {
+                for (int j = 0; j < switches.Count; j++)
+                {
+                    switches[j].SetActive(false);
+                }
+                platformHard.SetActive(true);
+            }
         }
     }
 

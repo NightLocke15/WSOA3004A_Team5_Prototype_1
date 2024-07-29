@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4583133a50840f44e818b1af38132440, type: 3}
   m_Name: Stage 5
   m_EditorClassIdentifier: 
-  levelNumber: 0
   tiles:
   - position: {x: 0, y: 0}
     tileType: 1
@@ -37,7 +36,7 @@ MonoBehaviour:
   - position: {x: 10, y: 0}
     tileType: 0
   - position: {x: 11, y: 0}
-    tileType: 3
+    tileType: 7
   - position: {x: 12, y: 0}
     tileType: 0
   - position: {x: 13, y: 0}

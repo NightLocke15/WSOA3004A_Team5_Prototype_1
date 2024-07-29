@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8067934860066218584, guid: c7298e105a3def74fa9a3bf3d04718af, type: 3}
       propertyPath: m_Name
-      value: Half Two
+      value: Half Two Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067934860066218584, guid: c7298e105a3def74fa9a3bf3d04718af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8067934860066218584, guid: c7298e105a3def74fa9a3bf3d04718af, type: 3}
       propertyPath: m_TagString

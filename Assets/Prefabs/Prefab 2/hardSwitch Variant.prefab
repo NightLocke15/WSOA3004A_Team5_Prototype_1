@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 6276292178810989284, guid: 20b0a36270097864e981ff736b77478a, type: 3}
       propertyPath: platformHard
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2052416473202525335, guid: 64febd1eac80fa24ca9773724ea8c09f, type: 3}
     - target: {fileID: 6276292178810989284, guid: 20b0a36270097864e981ff736b77478a, type: 3}
       propertyPath: activatableObject
       value: 
@@ -20,20 +20,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6276292178810989285, guid: 20b0a36270097864e981ff736b77478a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276292178810989285, guid: 20b0a36270097864e981ff736b77478a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276292178810989285, guid: 20b0a36270097864e981ff736b77478a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6276292178810989285, guid: 20b0a36270097864e981ff736b77478a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6276292178810989285, guid: 20b0a36270097864e981ff736b77478a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6276292178810989285, guid: 20b0a36270097864e981ff736b77478a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6276292178810989285, guid: 20b0a36270097864e981ff736b77478a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -65,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6276292178810989288, guid: 20b0a36270097864e981ff736b77478a, type: 3}
       propertyPath: m_Name
-      value: hardSwitch
+      value: hardSwitch Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20b0a36270097864e981ff736b77478a, type: 3}

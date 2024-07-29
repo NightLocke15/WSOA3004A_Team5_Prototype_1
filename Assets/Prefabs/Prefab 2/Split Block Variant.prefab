@@ -16,6 +16,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6825617924788490986, guid: 8b923f1037ebcdc40b92958e46536f3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825617924788490986, guid: 8b923f1037ebcdc40b92958e46536f3d, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
@@ -61,19 +65,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6825617924788490990, guid: 8b923f1037ebcdc40b92958e46536f3d, type: 3}
       propertyPath: m_Name
-      value: Split Block
+      value: Split Block Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8821148559577867076, guid: 8b923f1037ebcdc40b92958e46536f3d, type: 3}
       propertyPath: cubeOne
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7150955202915025769, guid: 712212e76ce2562458aae501d5f92dc2, type: 3}
     - target: {fileID: 8821148559577867076, guid: 8b923f1037ebcdc40b92958e46536f3d, type: 3}
       propertyPath: cubeTwo
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8067934860066218584, guid: c7298e105a3def74fa9a3bf3d04718af, type: 3}
     - target: {fileID: 8821148559577867076, guid: 8b923f1037ebcdc40b92958e46536f3d, type: 3}
       propertyPath: playerCube
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 198147348593917088, guid: 16f8155cd6880944a92ecb1670d1126d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b923f1037ebcdc40b92958e46536f3d, type: 3}

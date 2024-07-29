@@ -49,7 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformSoft: {fileID: 0}
+  activate: 0
   softParticle: {fileID: 3118923851260588572}
+  switches: []
+  _levelData: {fileID: 0}
+  _levelManager: {fileID: 0}
 --- !u!33 &1134353224239415269
 MeshFilter:
   m_ObjectHideFlags: 0

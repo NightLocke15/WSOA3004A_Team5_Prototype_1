@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7150955202915025769, guid: 712212e76ce2562458aae501d5f92dc2, type: 3}
       propertyPath: m_Name
-      value: Half One
+      value: Half One Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7150955202915025769, guid: 712212e76ce2562458aae501d5f92dc2, type: 3}
       propertyPath: m_TagString

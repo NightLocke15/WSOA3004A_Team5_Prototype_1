@@ -7,13 +7,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8252963785534733496, guid: 05104b3fe7bd6044696467cc437dd3f8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b7b2827e74218f4498c2ce269e35f38, type: 2}
     - target: {fileID: 8252963785534733498, guid: 05104b3fe7bd6044696467cc437dd3f8, type: 3}
       propertyPath: m_Name
-      value: ActivatableBridge
+      value: ActivatableBridge Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252963785534733498, guid: 05104b3fe7bd6044696467cc437dd3f8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8252963785534733503, guid: 05104b3fe7bd6044696467cc437dd3f8, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252963785534733503, guid: 05104b3fe7bd6044696467cc437dd3f8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252963785534733503, guid: 05104b3fe7bd6044696467cc437dd3f8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8252963785534733503, guid: 05104b3fe7bd6044696467cc437dd3f8, type: 3}
       propertyPath: m_LocalPosition.x

@@ -20,10 +20,35 @@ public class Movement : MonoBehaviour
     public List<string> strings = new List<string>(); //List that contains string that tells what the previous state was, upright or not
     private string state;
     public GameObject cube;
+    public TileManager _tileManager;
+    public LevelManager _levelManager;
+    public LevelData _levelData;
+    public bool startLevel;
+    public Vector2Int startTile;
     #endregion
+
+    private void Start()
+    {
+        startLevel = true;
+    }
 
     private void Update()
     {
+        _levelData = _levelManager.levels[_levelManager.currentLevelIndex];
+
+        if (startLevel == true)
+        {
+            for (int i = 0; i < _levelData.tiles.Length; i++)
+            {
+               if (_levelData.tiles[i].tileType == TileType.Start)
+                {
+                    startTile = _levelData.tiles[i].position;
+                    transform.position = new Vector3(startTile.x, 1.1f, startTile.y);
+                    startLevel = false;
+                }
+            }
+        }
+
         currentY = transform.position.y;
 
         //Determine whether block is standing or not

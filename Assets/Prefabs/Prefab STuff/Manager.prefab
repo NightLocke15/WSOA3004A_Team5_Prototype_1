@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3777616875828166411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.38507256, y: -0.17816792, z: 0.027414886}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47,16 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidTilePrefab: {fileID: 4008376173587073472, guid: 72d2870232d625644bc47334c35e42f1, type: 3}
   emptyTilePrefab: {fileID: 7402088969407376016, guid: 10e5a804c3448cc4e9e268c11cb1f75d, type: 3}
-  softSwitchPrefab: {fileID: 4008376173587073472, guid: 226a535fc32df1b4faf3b443ed1f4c97, type: 3}
-  hardSwitchPrefab: {fileID: 4008376173587073472, guid: 226a535fc32df1b4faf3b443ed1f4c97, type: 3}
-  orangeTilePrefab: {fileID: 4008376173587073472, guid: 226a535fc32df1b4faf3b443ed1f4c97, type: 3}
+  softSwitchPrefab: {fileID: 3984938125301442997, guid: 744016354baba244ca258fcf5255c884, type: 3}
+  hardSwitchPrefab: {fileID: 150298058883268820, guid: 8eb18f3c3752e5b43b6eafc88f6c5b8e, type: 3}
+  orangeTilePrefab: {fileID: 5985910446907190482, guid: 2c52501845eeaa14eb2e57ad78d3005a, type: 3}
   split1TilePrefab: {fileID: 4008376173587073472, guid: 226a535fc32df1b4faf3b443ed1f4c97, type: 3}
   split2TilePrefab: {fileID: 4008376173587073472, guid: 226a535fc32df1b4faf3b443ed1f4c97, type: 3}
   startTilePrefab: {fileID: 4008376173587073472, guid: d2fd48ea660ac7848befc558dbafefa0, type: 3}
   goalTilePrefab: {fileID: 4008376173587073472, guid: d2fd48ea660ac7848befc558dbafefa0, type: 3}
-  softTilePrefab: {fileID: 4008376173587073472, guid: 226a535fc32df1b4faf3b443ed1f4c97, type: 3}
-  hardTilePrefab: {fileID: 4008376173587073472, guid: 226a535fc32df1b4faf3b443ed1f4c97, type: 3}
-  splitSwitchPrefab: {fileID: 4008376173587073472, guid: 226a535fc32df1b4faf3b443ed1f4c97, type: 3}
+  softTilePrefab: {fileID: 4686041923818237943, guid: a3201a32e21d2a7488a55b027dfe525c, type: 3}
+  hardTilePrefab: {fileID: 2052416473202525335, guid: 64febd1eac80fa24ca9773724ea8c09f, type: 3}
+  splitSwitchPrefab: {fileID: 2748478884085186752, guid: 27cdf0ba521f60f48ab07a1ec8be771a, type: 3}
   animDuration: 1
   maxDelay: 0.5
 --- !u!114 &3777616875828166410
@@ -78,4 +78,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 092cd8003f311f643b9d21a550ffc3fd, type: 2}
   - {fileID: 11400000, guid: c04d067c7aa33584fb325f0ed339fe62, type: 2}
   - {fileID: 11400000, guid: 04e4581e1da99f44f8f05e7c976392bd, type: 2}
+  _movement: {fileID: 0}
   currentLevelIndex: 0
