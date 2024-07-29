@@ -6,8 +6,16 @@ public class TileManager : MonoBehaviour
 {
     public GameObject solidTilePrefab;
     public GameObject emptyTilePrefab;
-    public GameObject redTilePrefab;
-    public GameObject greenTilePrefab;
+    public GameObject softSwitchPrefab;
+    public GameObject hardSwitchPrefab;
+    public GameObject orangeTilePrefab;
+    public GameObject split1TilePrefab;
+    public GameObject split2TilePrefab;
+    public GameObject startTilePrefab;
+    public GameObject goalTilePrefab;
+    public GameObject softTilePrefab;
+    public GameObject hardTilePrefab;
+    public GameObject splitSwitchPrefab;
 
     public float animDuration = 1.0f;
     public float maxDelay = 0.5f;
@@ -30,34 +38,34 @@ public class TileManager : MonoBehaviour
                     tilePrefab = emptyTilePrefab;
                     break;
                 case TileType.Soft:
-                    tilePrefab = redTilePrefab;
+                    tilePrefab = softSwitchPrefab;
                     break;
                 case TileType.Hard:
-                    tilePrefab = redTilePrefab;
+                    tilePrefab = hardSwitchPrefab;
                     break;
                 case TileType.Orange:
-                    tilePrefab = redTilePrefab;
+                    tilePrefab = orangeTilePrefab;
                     break;
                 case TileType.Split1:
-                    tilePrefab = greenTilePrefab;
+                    tilePrefab = split1TilePrefab;
                     break;
                 case TileType.Split2:
-                    tilePrefab = greenTilePrefab;
+                    tilePrefab = split2TilePrefab;
                     break;
                 case TileType.Start:
-                    tilePrefab = greenTilePrefab;
+                    tilePrefab = startTilePrefab;
                     break;
                 case TileType.Goal:
-                    tilePrefab = greenTilePrefab;
+                    tilePrefab = goalTilePrefab;
                     break;
                 case TileType.softTile:
-                    tilePrefab = redTilePrefab;
+                    tilePrefab = softTilePrefab;
                     break;
                 case TileType.hardTile:
-                    tilePrefab = redTilePrefab;
+                    tilePrefab = hardTilePrefab;
                     break;
                 case TileType.Split:
-                    tilePrefab = redTilePrefab;
+                    tilePrefab = splitSwitchPrefab;
                     break;
             }
 
