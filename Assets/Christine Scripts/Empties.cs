@@ -6,6 +6,8 @@ public class Empties : MonoBehaviour
 {
     [SerializeField] private bool falling;
     [SerializeField] private GameObject playerCube;
+    [SerializeField] private GameObject HalfCube1;
+    [SerializeField] private GameObject HalfCube2;
     private bool timer;
     public float seconds = 0;
     private bool moveDown = false;
@@ -14,12 +16,15 @@ public class Empties : MonoBehaviour
     HardSwitch hardSwitch;
     public LevelData _levelData;
     public LevelManager _levelManager;
+    SplitCube _splitCube;
 
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
         playerCube = GameObject.Find("Player Holder");
         _levelManager = GameObject.Find("Manager").GetComponent<LevelManager>();
+        HalfCube1 = GameObject.Find("Half One");
+        HalfCube1 = GameObject.Find("Half Two");
 
     }
 
@@ -29,43 +34,138 @@ public class Empties : MonoBehaviour
 
         for (int i = 0; i < _levelData.tiles.Length; i++)
         {
-            if (_levelData.tiles[i].tileType == TileType.Soft)
+            if (_levelData.tiles[i].tileType.Equals(TileType.Split))
             {
-                softSwitch = GameObject.Find("tile" + i).GetComponent<SoftSwitch>();
+                if (_levelData.tiles[i].tileType == TileType.Split)
+                {
+                    _splitCube = GameObject.Find("tile" + i).GetComponent<SplitCube>();
+                }
+                else
+                {
+
+                }
             }
+            else { }
         }
 
         for (int i = 0; i < _levelData.tiles.Length; i++)
         {
-            if (_levelData.tiles[i].tileType == TileType.Hard)
+            if (_levelData.tiles[i].tileType.Equals(TileType.Soft))
             {
-                hardSwitch = GameObject.Find("tile" + i).GetComponent<HardSwitch>();
+                if (_levelData.tiles[i].tileType == TileType.Soft)
+                {
+                    softSwitch = GameObject.Find("tile" + i).GetComponent<SoftSwitch>();
+                }
+                else
+                {
+
+                }
             }
+            else { }
+        }
+
+        for (int i = 0; i < _levelData.tiles.Length; i++)
+        {
+            if (_levelData.tiles[i].tileType.Equals(TileType.Hard))
+            {
+                if (_levelData.tiles[i].tileType == TileType.Hard)
+                {
+                    hardSwitch = GameObject.Find("tile" + i).GetComponent<HardSwitch>();
+                }
+                else
+                {
+
+                }
+            }
+            else { }
         }
 
         if (falling == true && _movement._moving == false)
         {
+            if (_movement.strings[_movement.strings.Count - 1] == "upright")
+            {
+                if (_movement.left == true)
+                {
+                    playerCube.transform.Rotate(0, 0, 5f, Space.World);
+                    playerCube.transform.position = playerCube.transform.position + new Vector3(-1, -2.5f, 0) * Time.deltaTime * 5f;
+                }
+                else if (_movement.right == true)
+                {
+                    playerCube.transform.Rotate(0, 0, -5f, Space.World);
+                    playerCube.transform.position = playerCube.transform.position + new Vector3(1, -2.5f, 0) * Time.deltaTime * 5f;
+                }
+                else if (_movement.front == true)
+                {
+                    playerCube.transform.Rotate(5f, 0, 0, Space.World);
+                    playerCube.transform.position = playerCube.transform.position + new Vector3(0, -2.5f, 1) * Time.deltaTime * 5f;
+                }
+                else if (_movement.back == true)
+                {
+                    playerCube.transform.Rotate(-5f, 0, 0, Space.World);
+                    playerCube.transform.position = playerCube.transform.position + new Vector3(0, -2.5f, -1) * Time.deltaTime * 5f;
+                }
+            }
+            else if (_movement.strings[_movement.strings.Count - 1] == "not upright")
+            {
+                if (_movement.left == true)
+                {
+                    if (_movement.strings[_movement.strings.Count - 1] != _movement.strings[_movement.strings.Count - 2])
+                    {
+                        playerCube.transform.Rotate(0, 0, 5f, Space.World);
+                        playerCube.transform.position = playerCube.transform.position + new Vector3(-1, -2.5f, 0) * Time.deltaTime * 5f;
+                    }
+                    else if (_movement.strings[_movement.strings.Count - 1] == _movement.strings[_movement.strings.Count - 2])
+                    {
+                        playerCube.transform.Rotate(0, 0, 1f, Space.World);
+                        playerCube.transform.position = playerCube.transform.position + new Vector3(-0.5f, -1f, 0) * Time.deltaTime * 5f;
+                    }
+                }
+                else if (_movement.right == true)
+                {
+                    if (_movement.strings[_movement.strings.Count - 1] != _movement.strings[_movement.strings.Count - 2])
+                    {
+                        playerCube.transform.Rotate(0, 0, -5f, Space.World);
+                        playerCube.transform.position = playerCube.transform.position + new Vector3(1, -2.5f, 0) * Time.deltaTime * 5f;
+                    }
+                    else if (_movement.strings[_movement.strings.Count - 1] == _movement.strings[_movement.strings.Count - 2])
+                    {
+                        playerCube.transform.Rotate(0, 0, -1f, Space.World);
+                        playerCube.transform.position = playerCube.transform.position + new Vector3(0.5f, -1f, 0) * Time.deltaTime * 5f;
+                    }
+
+                }
+                else if (_movement.front == true)
+                {
+                    if (_movement.strings[_movement.strings.Count - 1] != _movement.strings[_movement.strings.Count - 2])
+                    {
+                        playerCube.transform.Rotate(5f, 0, 0, Space.World);
+                        playerCube.transform.position = playerCube.transform.position + new Vector3(0, -2.5f, 1) * Time.deltaTime * 5f;
+                    }
+                    else if (_movement.strings[_movement.strings.Count - 1] == _movement.strings[_movement.strings.Count - 2])
+                    {
+                        playerCube.transform.Rotate(1, 0, 0f, Space.World);
+                        playerCube.transform.position = playerCube.transform.position + new Vector3(0, -1f, 0.5f) * Time.deltaTime * 5f;
+                    }
+
+                }
+                else if (_movement.back == true)
+                {
+                    if (_movement.strings[_movement.strings.Count - 1] != _movement.strings[_movement.strings.Count - 2])
+                    {
+                        playerCube.transform.Rotate(-5f, 0, 0, Space.World);
+                        playerCube.transform.position = playerCube.transform.position + new Vector3(0, -2.5f, -1) * Time.deltaTime * 5f;
+                    }
+                    else if (_movement.strings[_movement.strings.Count - 1] == _movement.strings[_movement.strings.Count - 2])
+                    {
+                        playerCube.transform.Rotate(-1, 0, 0f, Space.World);
+                        playerCube.transform.position = playerCube.transform.position + new Vector3(0, -1f, -0.5f) * Time.deltaTime * 5f;
+                    }
+
+                }
+            }
+
             Debug.Log("Falling");
-            if (_movement.left == true)
-            {
-                playerCube.transform.Rotate(0, 0, 1f, Space.World);
-                playerCube.transform.position = playerCube.transform.position + new Vector3(-2.5f, -2.5f, 0) * Time.deltaTime * 2f;
-            }
-            else if (_movement.right == true)
-            {
-                playerCube.transform.Rotate(0, 0, -1f, Space.World);
-                playerCube.transform.position = playerCube.transform.position + new Vector3(2.5f, -2.5f, 0) * Time.deltaTime * 2f;
-            }
-            else if (_movement.front == true)
-            {
-                playerCube.transform.Rotate(1f, 0, 0, Space.World);
-                playerCube.transform.position = playerCube.transform.position + new Vector3(0, -2.5f, 2.5f) * Time.deltaTime * 2f;
-            }
-            else if (_movement.back == true)
-            {
-                playerCube.transform.Rotate(-1f, 0, 0, Space.World);
-                playerCube.transform.position = playerCube.transform.position + new Vector3(0, -2.5f, -2.5f) * Time.deltaTime * 2f;
-            }
+
             timer = true;
         }
         else
@@ -108,15 +208,98 @@ public class Empties : MonoBehaviour
         {
             Debug.Log("Empty");
             falling = true;
-            for (int i = 0; i < softSwitch.switches.Count; i++)
+
+            for (int j = 0; j < _levelData.tiles.Length; j++)
             {
-                softSwitch.switches[i].SetActive(false);
-                softSwitch.activate = 0;
+                if (_levelData.tiles[j].tileType.Equals(TileType.Soft))
+                {
+                    if (softSwitch.switches.Count > 0)
+                    {
+                        for (int i = 0; i < softSwitch.switches.Count; i++)
+                        {
+                            softSwitch.switches[i].SetActive(false);
+                            softSwitch.activate = 0;
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else { }
             }
-            for (int i = 0; i < hardSwitch.switches.Count; i++)
+
+            for (int j = 0; j < _levelData.tiles.Length; j++)
             {
-                hardSwitch.switches[i].SetActive(false);
-                hardSwitch.activate = 0;
+                if (_levelData.tiles[j].tileType.Equals(TileType.Hard))
+                {
+                    if (hardSwitch.switches.Count > 0)
+                    {
+                        for (int i = 0; i < hardSwitch.switches.Count; i++)
+                        {
+                            hardSwitch.switches[i].SetActive(false);
+                            hardSwitch.activate = 0;
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else { }
+            }
+        }
+        else if (other.gameObject.tag == "HalfCube")
+        {
+            moveDown = true;
+            _splitCube.playerCube.transform.position = new Vector3(_movement.startTile.x, 10.1f, _movement.startTile.y);
+            _splitCube.playerCube.transform.rotation = Quaternion.Euler(0, 0, 0);
+            _splitCube.playerCube.SetActive(true);
+            _splitCube.cubeOne.SetActive(false);
+            _splitCube.cubeTwo.SetActive(false);
+            _movement._moving = false;
+
+            _splitCube.movementCube1._moving = false;
+            _splitCube.movementCube2._moving = false;
+
+            for (int j = 0; j < _levelData.tiles.Length; j++)
+            {
+                if (_levelData.tiles[j].tileType.Equals(TileType.Soft))
+                {
+                    if (softSwitch.switches.Count > 0)
+                    {
+                        for (int i = 0; i < softSwitch.switches.Count; i++)
+                        {
+                            softSwitch.switches[i].SetActive(false);
+                            softSwitch.activate = 0;
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else { }
+            }
+
+            for (int j = 0; j < _levelData.tiles.Length; j++)
+            {
+                if (_levelData.tiles[j].tileType.Equals(TileType.Hard))
+                {
+                    if (hardSwitch.switches.Count > 0)
+                    {
+                        for (int i = 0; i < hardSwitch.switches.Count; i++)
+                        {
+                            hardSwitch.switches[i].SetActive(false);
+                            hardSwitch.activate = 0;
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else { }
             }
         }
     }

@@ -27,16 +27,33 @@ public class HardSwitch : MonoBehaviour
 
         for (int i = 0; i < _levelData.tiles.Length; i++)
         {
-            if (_levelData.tiles[i].tileType == TileType.hardTile && switches.Count < 2)
+            if (_levelManager.currentLevelIndex == 3)
             {
-                GameObject tile = GameObject.Find("tile" + i);
-                switches.Add(tile);
-
-                for (int j = 0; j < switches.Count; j++)
+                if (_levelData.tiles[i].tileType == TileType.hardTile && switches.Count < 2)
                 {
-                    switches[j].SetActive(false);
+                    GameObject tile = GameObject.Find("tile" + i);
+                    switches.Add(tile);
+
+                    for (int j = 0; j < switches.Count; j++)
+                    {
+                        switches[j].SetActive(false);
+                    }
+                }
+            }    
+            else if (_levelManager.currentLevelIndex == 4)
+            {
+                if (_levelData.tiles[i].tileType == TileType.hardTile && switches.Count < 4)
+                {
+                    GameObject tile = GameObject.Find("tile" + i);
+                    switches.Add(tile);
+
+                    for (int j = 0; j < switches.Count; j++)
+                    {
+                        switches[j].SetActive(false);
+                    }
                 }
             }
+            
         }
     }
 

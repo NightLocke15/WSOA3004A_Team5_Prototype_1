@@ -75,8 +75,23 @@ public class Goal : MonoBehaviour
         {
             timer = true;
             moveDown = true;
-            softSwitch.switches.Clear();
-            hardSwitch.switches.Clear();
+            for (int j = 0; j < _levelData.tiles.Length; j++)
+            {
+                if (_levelData.tiles[j].tileType.Equals(TileType.Soft))
+                {
+                    softSwitch.switches.Clear();
+                }
+            }
+
+            for (int j = 0; j < _levelData.tiles.Length; j++)
+            {
+                if (_levelData.tiles[j].tileType.Equals(TileType.Hard))
+                {
+                    hardSwitch.switches.Clear();
+                }
+            }
+           
+            
         }
         
     }

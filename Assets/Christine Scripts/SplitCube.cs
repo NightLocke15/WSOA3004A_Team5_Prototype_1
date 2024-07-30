@@ -74,7 +74,7 @@ public class SplitCube : MonoBehaviour
             }
         }
 
-        if (_levelManager.currentLevelIndex == 3)
+        if (_levelManager.currentLevelIndex == 3 || _levelManager.currentLevelIndex == 4)
         {
             for (int i = 0; i < _levelData.tiles.Length; i++)
             {
@@ -106,7 +106,9 @@ public class SplitCube : MonoBehaviour
             float zT2 = Mathf.Round(Tile2.transform.position.z * 2f) / 2f;
 
             cubeOne.transform.position = new Vector3(xT1, 0.6f, zT1);
+            cubeOne.transform.rotation = Quaternion.Euler(0, 0, 0);
             cubeTwo.transform.position = new Vector3(xT2, 0.6f, zT2);
+            cubeTwo.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             _scriptHandler.movementCube1.enabled = true;
             splitParticle.Play();
