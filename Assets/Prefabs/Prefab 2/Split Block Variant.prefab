@@ -79,5 +79,9 @@ PrefabInstance:
       propertyPath: playerCube
       value: 
       objectReference: {fileID: 198147348593917088, guid: 16f8155cd6880944a92ecb1670d1126d, type: 3}
+    - target: {fileID: 8821148559577867076, guid: 8b923f1037ebcdc40b92958e46536f3d, type: 3}
+      propertyPath: splitParticle
+      value: 
+      objectReference: {fileID: 4567119409843658154, guid: 17c2381ce710abe43ba14e3ff85267f1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b923f1037ebcdc40b92958e46536f3d, type: 3}
