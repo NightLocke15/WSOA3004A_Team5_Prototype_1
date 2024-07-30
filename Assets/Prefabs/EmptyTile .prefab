@@ -58,3 +58,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a2f337fabf5e34b93b08afd9bee7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  falling: 0
+  playerCube: {fileID: 0}
+  seconds: 0
+  _levelData: {fileID: 0}
+  _levelManager: {fileID: 0}
+  fallingSound: {fileID: 8300000, guid: ffb10d6d163d11642be65564e4869da9, type: 3}

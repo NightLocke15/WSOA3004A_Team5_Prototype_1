@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 78890246030025385, guid: 712212e76ce2562458aae501d5f92dc2, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ec74f00cdb3fc6b4f98603455450b0fd, type: 3}
+    - target: {fileID: 78890246030025385, guid: 712212e76ce2562458aae501d5f92dc2, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6974057129999431703, guid: 712212e76ce2562458aae501d5f92dc2, type: 3}
       propertyPath: cubeOne
       value: 
@@ -19,6 +27,10 @@ PrefabInstance:
       propertyPath: playerCube
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6974057129999431703, guid: 712212e76ce2562458aae501d5f92dc2, type: 3}
+      propertyPath: combineSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 765094297b003e341a945dc954b68c74, type: 3}
     - target: {fileID: 7150955202915025765, guid: 712212e76ce2562458aae501d5f92dc2, type: 3}
       propertyPath: m_RootOrder
       value: 0
