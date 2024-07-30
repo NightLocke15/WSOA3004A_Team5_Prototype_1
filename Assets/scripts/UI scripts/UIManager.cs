@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
     {
         // Load the game scene, replace "GameScene" with your scene name
         Debug.Log("Starting game");
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainScene");
     }
 
     private void ExitGame()
