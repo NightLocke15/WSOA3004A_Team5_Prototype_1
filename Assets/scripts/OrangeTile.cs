@@ -4,24 +4,40 @@ public class OrangeTile : MonoBehaviour
 {
     public GameObject orangeTile;
     Movement _movement;
+    ScriptHandler _scripthandler;
+    [SerializeField] private bool moveDown = false;
+    [SerializeField] private GameObject playerCube;
 
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
         orangeTile.SetActive(true);
+        playerCube = GameObject.Find("Player Holder");
+        _scripthandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && _movement.upright == true)
         {
+            _scripthandler.fall = true;
+            _scripthandler.timer = true;
             orangeTile.SetActive(false);
             Debug.Log("OrangeTile");
+            Debug.Log(gameObject.name);
+
         }
         else
         {
 
         }
+
+        
         //Debug.Log("Something entered the tile: " + other.name);
     }
 }

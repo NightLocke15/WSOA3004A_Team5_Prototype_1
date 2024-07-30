@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public TileManager tileManager;
     public LevelData[] levels;
     public Movement _movement;
+    public bool levelLoad;
 
     public int currentLevelIndex = 0;
 
@@ -33,11 +34,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void level()
+    {
+        LoadNextLevel();
+        Debug.Log("working2");
+        _movement.startLevel = true;
+    }
+
     public void LoadCurrentLevel()
     {
         if (currentLevelIndex >= 0 && currentLevelIndex < levels.Length)
         {
             tileManager.LoadLevel(levels[currentLevelIndex]);
+            levelLoad = true;
         }
     }
 

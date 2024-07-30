@@ -8,7 +8,7 @@ public class HardSwitch : MonoBehaviour
     //private bool playerExited = false; // Track if the player has exited the tile
     Movement _movement;
     public GameObject platformHard;
-    private int activate = 0;
+    public int activate = 0;
     public ParticleSystem hardParticle;
     public List<GameObject> switches = new List<GameObject>();
 

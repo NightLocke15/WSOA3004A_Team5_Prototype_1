@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 3804719395732691313}
   - component: {fileID: 7578740392328220559}
   - component: {fileID: 9047920244833435988}
-  - component: {fileID: 2969840706128071673}
   m_Layer: 0
-  m_Name: GoalTile
+  m_Name: StartTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4008376173587073472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.3, z: 0.5}
+  m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,24 +92,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4008376173587073472}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2969840706128071673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4008376173587073472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7302b051e0709aa4cb55857f083f55a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileManager: {fileID: 3777616875828166405, guid: 2cc6e92e687132e459a44842f4d20772, type: 3}
-  levels: []
-  currentLevelIndex: 0
-  _movement: {fileID: 198147348593917089, guid: 16f8155cd6880944a92ecb1670d1126d, type: 3}
