@@ -17,6 +17,9 @@ public class SplitCube : MonoBehaviour
     public SmallMovement movementCube1;
     public SmallMovement movementCube2;
 
+    public GameObject Tile1;
+    public GameObject Tile2;
+
 
     private void Start()
     {
@@ -70,6 +73,22 @@ public class SplitCube : MonoBehaviour
 
             }
         }
+
+        if (_levelManager.currentLevelIndex == 3)
+        {
+            for (int i = 0; i < _levelData.tiles.Length; i++)
+            {
+                if (_levelData.tiles[i].tileType == TileType.Split1)
+                {
+                    Tile1 = GameObject.Find("tile" + i);
+                }
+
+                if (_levelData.tiles[i].tileType == TileType.Split2)
+                {
+                    Tile2 = GameObject.Find("tile" + i);
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,11 +100,13 @@ public class SplitCube : MonoBehaviour
             cubeOne.SetActive(true);
             cubeTwo.SetActive(true);
 
-            float x = Mathf.Round(playerCube.transform.position.x * 2f) / 2f;
-            float z = Mathf.Round(playerCube.transform.position.z * 2f) / 2f;
+            float xT1 = Mathf.Round(Tile1.transform.position.x * 2f) / 2f;
+            float zT1 = Mathf.Round(Tile1.transform.position.z * 2f) / 2f;
+            float xT2 = Mathf.Round(Tile2.transform.position.x * 2f) / 2f;
+            float zT2 = Mathf.Round(Tile2.transform.position.z * 2f) / 2f;
 
-
-            cubeOne.transform.position = new Vector3(x, 0.6f, z);
+            cubeOne.transform.position = new Vector3(xT1, 0.6f, zT1);
+            cubeTwo.transform.position = new Vector3(xT2, 0.6f, zT2);
 
             _scriptHandler.movementCube1.enabled = true;
             splitParticle.Play();
