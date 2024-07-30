@@ -12,6 +12,9 @@ public class ScriptHandler : MonoBehaviour
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
 
+        movementCube1 = GameObject.Find("Half One").GetComponent<SmallMovement>();
+        movementCube2 = GameObject.Find("Half Two").GetComponent<SmallMovement>();
+
         movementCube1.enabled = false;
         movementCube2.enabled = false;
     }
@@ -20,6 +23,8 @@ public class ScriptHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("space");
+
             if (movementCube1.enabled == true)
             {
                 movementCube1.enabled = false;

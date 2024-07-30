@@ -14,6 +14,9 @@ public class SplitCube : MonoBehaviour
     public ParticleSystem splitParticle;
     public Vector2Int splitTile;
 
+    public SmallMovement movementCube1;
+    public SmallMovement movementCube2;
+
 
     private void Start()
     {
@@ -23,6 +26,12 @@ public class SplitCube : MonoBehaviour
         playerCube = GameObject.Find("Player Holder");
         cubeOne = GameObject.Find("Half One");
         cubeTwo = GameObject.Find("Half Two");
+
+        movementCube1 = GameObject.Find("Half One").GetComponent<SmallMovement>();
+        movementCube2 = GameObject.Find("Half Two").GetComponent<SmallMovement>();
+
+        movementCube1.enabled = false;
+        movementCube2.enabled = false;
     }
 
     private void Update()
@@ -39,6 +48,26 @@ public class SplitCube : MonoBehaviour
                     transform.position = new Vector3(splitTile.x, 1.1f, splitTile.y);
                     _movement.startLevel = false;
                 }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("space");
+
+            if (movementCube1.enabled == true)
+            {
+                movementCube1.enabled = false;
+                movementCube2.enabled = true;
+            }
+            else if (movementCube2.enabled == true)
+            {
+                movementCube2.enabled = false;
+                movementCube1.enabled = true;
+            }
+            else
+            {
+
             }
         }
     }
