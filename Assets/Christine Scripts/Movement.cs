@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Movement : MonoBehaviour
 {
     #region Booleans
@@ -25,11 +25,20 @@ public class Movement : MonoBehaviour
     public LevelData _levelData;
     public bool startLevel;
     public Vector2Int startTile;
+     public TMP_Text moveCounterText;
+      private AudioSource audioSource; // Reference to the AudioSource component
+
+private int moveCounter = 0;
+
     #endregion
 
     private void Start()
     {
         startLevel = true;
+        UpdateMoveCounterUI(); 
+
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     private void Update()
@@ -378,14 +387,32 @@ public class Movement : MonoBehaviour
 
     IEnumerator Rolling(Vector3 anchor, Vector3 axis)
     {
-        _moving = true;
 
-        for (int i = 0; i < (90 / speed); i++)
-        {
-            transform.RotateAround(anchor, axis, speed);
-            yield return new WaitForSeconds(0.01f);
-        }
+        _moving = true;
+                // Play the movement sound
+                audioSource.Play();
+
+                for (int i = 0; i < (90 / speed); i++)
+                {
+                    transform.RotateAround(anchor, axis, speed);
+                    yield return new WaitForSeconds(0.01f);
+                }
 
         _moving = false;
+        // Increase the move counter and update the UI
+        moveCounter++;
+        UpdateMoveCounterUI();
     }
-}
+
+    private void UpdateMoveCounterUI()
+    {
+        if (moveCounterText != null)
+        {
+            moveCounterText.text = "Moves: " + moveCounter;
+        }
+    }
+
+    }
+
+    
+

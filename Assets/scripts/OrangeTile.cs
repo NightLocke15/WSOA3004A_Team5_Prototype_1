@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class OrangeTile : MonoBehaviour
@@ -7,77 +8,68 @@ public class OrangeTile : MonoBehaviour
     ScriptHandler _scripthandler;
     [SerializeField] private bool moveDown = false;
     [SerializeField] private GameObject playerCube;
+    public AudioClip fallingSound; // Audio clip for the falling sound
+    private AudioSource audioSource; // Reference to the AudioSource component
+    private bool isBreaking = false; // Flag to check if the tile is already breaking
 
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
-        orangeTile.SetActive(true);
-        playerCube = GameObject.Find("Player Holder");
         _scripthandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
-    }
+        playerCube = GameObject.Find("Player Holder");
 
-    private void Update()
-    {
-        
+        // Add an AudioSource component if it doesn't exist
+        if (gameObject.GetComponent<AudioSource>() == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        else
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
+        }
+
+        if (fallingSound == null)
+        {
+            Debug.LogError("Falling sound clip is not assigned.");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && _movement.upright == true)
+        if (other.gameObject.tag == "Player" && _movement.upright == true && !isBreaking)
         {
+            isBreaking = true; // Set the flag to prevent re-triggering
             _scripthandler.fall = true;
             _scripthandler.timer = true;
-            orangeTile.SetActive(false);
-            Debug.Log("OrangeTile");
-            Debug.Log(gameObject.name);
+            PlayFallingSound();
+        }
+    }
 
+    private void PlayFallingSound()
+    {
+        if (audioSource != null && fallingSound != null)
+        {
+            audioSource.clip = fallingSound;
+            audioSource.Play();
+            StartCoroutine(SetTileInactiveAfterSound());
         }
         else
         {
-
+            Debug.LogWarning("AudioSource or fallingSound is missing.");
+            SetTileInactive();
         }
+    }
 
-        
-        //Debug.Log("Something entered the tile: " + other.name);
+    private IEnumerator SetTileInactiveAfterSound()
+    {
+        yield return new WaitWhile(() => audioSource.isPlaying);
+        SetTileInactive();
+    }
+
+    private void SetTileInactive()
+    {
+        orangeTile.SetActive(false);
+        Debug.Log("OrangeTile");
+        Debug.Log(gameObject.name);
     }
 }
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    Debug.Log("Something staying on the tile: " + other.name);
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        Debug.Log("Player is on the orange tile.");
-    //        if (IsStandingVertically(other))
-    //        {
-    //            Debug.Log("Player is standing vertically on the orange tile.");
-    //            BreakTile();
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Player is not standing vertically on the orange tile.");
-    //        }
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    Debug.Log("Something exited the tile: " + other.name);
-    //}
-
-    //private bool IsStandingVertically(Collider other)
-    //{
-     //   Bounds playerBounds = other.bounds;
-
-        // Check if the player block is standing vertically (tallest dimension is along the y-axis)
-      //  bool isStandingVertically = playerBounds.size.y > playerBounds.size.x && playerBounds.size.y > playerBounds.size.z;
-
-      //  return isStandingVertically;
-    //}
-
-   // private void BreakTile()
-   // {
-    //    Debug.Log("Orange Tile Broken!");
-    //    gameObject.SetActive(false); // Disable the tile to simulate breaking
-    //    Destroy(gameObject); // Destroy the tile to remove it from the hierarchy
-    //}
-//}

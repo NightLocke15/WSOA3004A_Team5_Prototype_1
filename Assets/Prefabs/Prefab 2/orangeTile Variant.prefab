@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: orangeTile
       value: 
       objectReference: {fileID: 5985910446907190482}
+    - target: {fileID: 1405804394070415246, guid: 13d4c3ecef7f0a349920d588c518b367, type: 3}
+      propertyPath: fallingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ffb10d6d163d11642be65564e4869da9, type: 3}
     - target: {fileID: 1405804394070415247, guid: 13d4c3ecef7f0a349920d588c518b367, type: 3}
       propertyPath: m_RootOrder
       value: 0

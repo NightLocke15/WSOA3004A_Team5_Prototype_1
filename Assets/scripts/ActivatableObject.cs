@@ -4,10 +4,13 @@ using UnityEngine;
 public class ActivatableObject : MonoBehaviour
 {
     private bool isActive = false;
+private AudioSource audioSource; // Reference to the AudioSource component
 
     void Start()
     {
         gameObject.SetActive(false); // Ensure the object is inactive at the start
+        audioSource = GetComponent<AudioSource>(); // Initialize the AudioSource
+
     }
 
     public void Activate()
@@ -16,6 +19,7 @@ public class ActivatableObject : MonoBehaviour
         {
             isActive = true;
             gameObject.SetActive(true);
+            PlayActivationSound(); // Play activation sound
             Debug.Log("Bridge Activated!");
         }
     }
@@ -26,6 +30,7 @@ public class ActivatableObject : MonoBehaviour
         {
             isActive = false;
             gameObject.SetActive(false);
+            PlayActivationSound(); // Play activation sound
             Debug.Log("Bridge Deactivated!");
         }
     }
@@ -46,4 +51,18 @@ public class ActivatableObject : MonoBehaviour
     {
         return isActive;
     }
+
+     private void PlayActivationSound()
+    {
+        if (audioSource != null && audioSource.clip != null)
+        {
+            Debug.Log("Playing Sound!"); // Debug statement
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or AudioClip not set!"); // Warning if sound is not set
+        }
+    }
+
 }
