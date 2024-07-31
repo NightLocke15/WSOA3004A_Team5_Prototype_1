@@ -13,6 +13,7 @@ public class SplitCube : MonoBehaviour
     public GameObject playerCube;
     public ParticleSystem splitParticle;
     public Vector2Int splitTile;
+    
 
     public SmallMovement movementCube1;
     public SmallMovement movementCube2;
@@ -33,6 +34,7 @@ public class SplitCube : MonoBehaviour
         movementCube1 = GameObject.Find("Half One").GetComponent<SmallMovement>();
         movementCube2 = GameObject.Find("Half Two").GetComponent<SmallMovement>();
 
+
         movementCube1.enabled = false;
         movementCube2.enabled = false;
 
@@ -42,6 +44,13 @@ public class SplitCube : MonoBehaviour
 
     private void Update()
     {
+        if (_scriptHandler.split == true)
+        {
+            movementCube1 = GameObject.Find("Half One").GetComponent<SmallMovement>();
+            movementCube2 = GameObject.Find("Half Two").GetComponent<SmallMovement>();
+        }
+        else { }
+
         _levelData = _levelManager.levels[_levelManager.currentLevelIndex];
 
         if (_movement.startLevel == true)
@@ -100,25 +109,31 @@ public class SplitCube : MonoBehaviour
         {
             Debug.Log("Yes");
             playerCube.SetActive(false);
-            cubeOne.SetActive(true);
-            cubeTwo.SetActive(true);
+            _scriptHandler.cubeOne.SetActive(true);
+            _scriptHandler.cubeTwo.SetActive(true);
+
+            _scriptHandler.split = true;
 
             float xT1 = Mathf.Round(Tile1.transform.position.x * 2f) / 2f;
             float zT1 = Mathf.Round(Tile1.transform.position.z * 2f) / 2f;
             float xT2 = Mathf.Round(Tile2.transform.position.x * 2f) / 2f;
             float zT2 = Mathf.Round(Tile2.transform.position.z * 2f) / 2f;
 
-            cubeOne.transform.position = new Vector3(xT1, 0.6f, zT1);
-            cubeOne.transform.rotation = Quaternion.Euler(0, 0, 0);
-            cubeTwo.transform.position = new Vector3(xT2, 0.6f, zT2);
-            cubeTwo.transform.rotation = Quaternion.Euler(0, 0, 0);
+            _scriptHandler.cubeOne.transform.position = new Vector3(xT1, 0.6f, zT1);
+            _scriptHandler.cubeOne.transform.rotation = Quaternion.Euler(0, 0, 0);
+            _scriptHandler.cubeTwo.transform.position = new Vector3(xT2, 0.6f, zT2);
+            _scriptHandler.cubeTwo.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             _scriptHandler.movementCube1.enabled = true;
+            _scriptHandler.movementCube2.enabled = false;
             // Play the split sound
             if (audioSource != null)
             {
                 audioSource.Play();
             }
+
+            movementCube1._moving = false;
+            movementCube2._moving = false;
 
             splitParticle.Play();
         }

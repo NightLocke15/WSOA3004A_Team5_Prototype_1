@@ -30,7 +30,7 @@ public class HardSwitch : MonoBehaviour
 
         for (int i = 0; i < _levelData.tiles.Length; i++)
         {
-            if (_levelManager.currentLevelIndex == 3)
+            if (_levelManager.currentLevelIndex == 1)
             {
                 if (_levelData.tiles[i].tileType == TileType.hardTile && switches.Count < 2)
                 {

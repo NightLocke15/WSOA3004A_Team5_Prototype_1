@@ -15,6 +15,10 @@ public class ScriptHandler : MonoBehaviour
     LevelManager _levelManager;
     public List<GameObject> hard = new List<GameObject>();
     public List<GameObject> soft = new List<GameObject>();
+    public GameObject cubeOne;
+    public GameObject cubeTwo;
+
+    public bool split;
 
     private void Start()
     {
@@ -24,6 +28,9 @@ public class ScriptHandler : MonoBehaviour
 
         movementCube1 = GameObject.Find("Half One").GetComponent<SmallMovement>();
         movementCube2 = GameObject.Find("Half Two").GetComponent<SmallMovement>();
+
+        cubeOne = GameObject.Find("Half One");
+        cubeTwo = GameObject.Find("Half Two");
 
         movementCube1.enabled = false;
         movementCube2.enabled = false;

@@ -8,6 +8,7 @@ public class Empties : MonoBehaviour
     [SerializeField] private GameObject playerCube;
     [SerializeField] private GameObject HalfCube1;
     [SerializeField] private GameObject HalfCube2;
+    ScriptHandler _scriptHandler;
     private bool timer;
     public float seconds = 0;
     private bool moveDown = false;
@@ -17,6 +18,10 @@ public class Empties : MonoBehaviour
     public LevelData _levelData;
     public LevelManager _levelManager;
     SplitCube _splitCube;
+    private bool fallCube1;
+    private bool fallCube2;
+    private bool timer2;
+    private float seconds2 = 0;
 
     private void Start()
     {
@@ -25,6 +30,7 @@ public class Empties : MonoBehaviour
         _levelManager = GameObject.Find("Manager").GetComponent<LevelManager>();
         HalfCube1 = GameObject.Find("Half One");
         HalfCube1 = GameObject.Find("Half Two");
+        _scriptHandler = GameObject.Find("Script Handler").GetComponent<ScriptHandler>();
 
     }
 
@@ -200,12 +206,45 @@ public class Empties : MonoBehaviour
             moveDown = false;
             playerCube.transform.position = new Vector3(_movement.startTile.x, 1.1f, _movement.startTile.y);
         }
+
+        if (fallCube1 == true)
+        {
+            _scriptHandler.cubeOne.transform.position = _scriptHandler.cubeOne.transform.position + new Vector3(0, -1f, 0) * Time.deltaTime * 5f;
+            timer2 = true;
+        }
+
+        if (fallCube2 == true)
+        {
+            _scriptHandler.cubeTwo.transform.position = _scriptHandler.cubeTwo.transform.position + new Vector3(0, -1f, 0) * Time.deltaTime * 5f;
+            timer2 = true;
+        }
+
+        if (timer2 == true)
+        {
+            seconds2 += Time.deltaTime;
+        }
+
+        if (seconds2 > 2f)
+        {
+            timer2 = false;
+            seconds2 = 0;
+            _scriptHandler.cubeOne.SetActive(false);
+            _scriptHandler.cubeTwo.SetActive(false);
+            fallCube1 = false;
+            fallCube2 = false;
+            moveDown = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
+            if (_scriptHandler.split == true)
+            {
+                _scriptHandler.split = false;
+            }
+
             Debug.Log("Empty");
             falling = true;
 
@@ -249,14 +288,27 @@ public class Empties : MonoBehaviour
                 else { }
             }
         }
-        else if (other.gameObject.tag == "HalfCube")
+        else if (other.gameObject.tag == "HalfCube1" || other.gameObject.tag == "HalfCube2")
         {
-            moveDown = true;
+            if (_scriptHandler.split == true)
+            {
+                _scriptHandler.split = false;
+            }
+
+            if (other.gameObject.tag == "HalfCube1")
+            {
+                fallCube1 = true;
+            }
+
+            if (other.gameObject.tag == "HalfCube2")
+            {
+                fallCube2 = true;
+            }
+
             _splitCube.playerCube.transform.position = new Vector3(_movement.startTile.x, 10.1f, _movement.startTile.y);
             _splitCube.playerCube.transform.rotation = Quaternion.Euler(0, 0, 0);
             _splitCube.playerCube.SetActive(true);
-            _splitCube.cubeOne.SetActive(false);
-            _splitCube.cubeTwo.SetActive(false);
+            
             _movement._moving = false;
 
             _splitCube.movementCube1._moving = false;

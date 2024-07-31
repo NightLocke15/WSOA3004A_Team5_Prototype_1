@@ -2616,6 +2616,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 699696723972735181, guid: c303e72f445c28748bfd7238f1b0d46b, type: 3}
+      propertyPath: m_TagString
+      value: HalfCube2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c303e72f445c28748bfd7238f1b0d46b, type: 3}
 --- !u!1001 &2381373928850582439
@@ -2778,6 +2782,10 @@ PrefabInstance:
     - target: {fileID: 8373749142182585022, guid: cc42ae220cdfb42468cc954eb874babf, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373749142182585022, guid: cc42ae220cdfb42468cc954eb874babf, type: 3}
+      propertyPath: m_TagString
+      value: HalfCube1
       objectReference: {fileID: 0}
     - target: {fileID: 8628922888924715456, guid: cc42ae220cdfb42468cc954eb874babf, type: 3}
       propertyPath: cubeTwo

@@ -10,10 +10,12 @@ public class Combination : MonoBehaviour
     Movement _movement;
      public AudioClip combineSound; // Audio clip for the combination sound
     public GameObject soundPlayer; // Reference to the GameObject that will play the soun
+    ScriptHandler _scriptHandler;
 
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
+        _scriptHandler = GameObject.Find("Script Handler").GetComponent<ScriptHandler>();
 
         if (soundPlayer == null)
         {
@@ -47,7 +49,10 @@ public class Combination : MonoBehaviour
     {
         if (other.gameObject.tag == "HalfCube")
         {
+            _scriptHandler.split = false;
             PlayCombineSound(); // Play the reconnect sound before changing states
+            _scriptHandler.movementCube1._moving = false;
+            _scriptHandler.movementCube2._moving = false;
 
             if (cubeOne.transform.position.z < (cubeTwo.transform.position.z - 0.2)) // forward and back
             {
