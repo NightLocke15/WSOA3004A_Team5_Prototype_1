@@ -14,11 +14,14 @@ public class HardSwitch : MonoBehaviour
 
     public LevelData _levelData;
     public LevelManager _levelManager;
+    private AudioSource audioSource; // Reference to the AudioSource component
 
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
         _levelManager = GameObject.Find("Manager").GetComponent<LevelManager>();
+
+         audioSource = GetComponent<AudioSource>(); // Initialize the AudioSource
     }
 
     private void Update()
@@ -62,6 +65,7 @@ public class HardSwitch : MonoBehaviour
         if (other.gameObject.tag == "Player" && _movement.upright == true)
         {
             activate++;
+            PlayActivationSound(); // Play activation sound
             hardParticle.Play();
 
             if (activate % 2 == 1)
@@ -80,6 +84,18 @@ public class HardSwitch : MonoBehaviour
                 }
                 platformHard.SetActive(true);
             }
+        }
+    }
+ private void PlayActivationSound()
+    {
+        if (audioSource != null && audioSource.clip != null)
+        {
+            Debug.Log("Playing Sound!"); // Debug statement
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or AudioClip not set!"); // Warning if sound is not set
         }
     }
 

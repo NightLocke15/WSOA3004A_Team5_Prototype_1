@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class Goal : MonoBehaviour
 {
     public TileManager tileManager;
@@ -22,12 +21,30 @@ public class Goal : MonoBehaviour
     SoftSwitch softSwitch;
     HardSwitch hardSwitch;
 
+    public AudioClip goalSound; // Add a field for the goal sound
+    private AudioSource audioSource; // Reference to the AudioSource component
+
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
         tileManager = GameObject.Find("Manager").GetComponent<TileManager>();
         levelManager = GameObject.Find("Manager").GetComponent<LevelManager>();
         playerCube = GameObject.Find("Player Holder");
+
+        // Add an AudioSource component if it doesn't exist
+        if (gameObject.GetComponent<AudioSource>() == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        else
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
+        }
+
+        if (goalSound == null)
+        {
+            Debug.LogError("Goal sound clip is not assigned.");
+        }
     }
 
     private void Update()
@@ -73,6 +90,12 @@ public class Goal : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && _movement.upright == true)
         {
+            if (audioSource != null && goalSound != null)
+            {
+                audioSource.clip = goalSound;
+                audioSource.Play();
+            }
+
             timer = true;
             moveDown = true;
             for (int j = 0; j < _levelData.tiles.Length; j++)
@@ -93,6 +116,5 @@ public class Goal : MonoBehaviour
            
             
         }
-        
     }
 }

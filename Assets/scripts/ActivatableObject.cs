@@ -5,9 +5,12 @@ public class ActivatableObject : MonoBehaviour
 {
     private bool isActive = false;
 
+
     void Start()
     {
         gameObject.SetActive(false); // Ensure the object is inactive at the start
+ 
+
     }
 
     public void Activate()
@@ -46,4 +49,6 @@ public class ActivatableObject : MonoBehaviour
     {
         return isActive;
     }
+
+     
 }

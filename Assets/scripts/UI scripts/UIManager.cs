@@ -27,14 +27,9 @@ public class UIManager : MonoBehaviour
         startButton.Select();
 
         // Add listeners to buttons
-        startButton.onClick.AddListener(StartGame);
-        exitButton.onClick.AddListener(ExitGame);
-        levelsButton.onClick.AddListener(OpenLevelSelection);
-
-        // Add listeners for playing sound
-        startButton.onClick.AddListener(PlayButtonClickSound);
-        exitButton.onClick.AddListener(PlayButtonClickSound);
-        levelsButton.onClick.AddListener(PlayButtonClickSound);
+        startButton.onClick.AddListener(StartGameWithSound);
+        exitButton.onClick.AddListener(ExitGameWithSound);
+        levelsButton.onClick.AddListener(OpenLevelSelectionWithSound);
 
         // Add debug logs
         startButton.onClick.AddListener(() => Debug.Log("Start button clicked"));
@@ -116,5 +111,23 @@ public class UIManager : MonoBehaviour
         {
             audioSource.PlayOneShot(buttonClickSound);
         }
+    }
+
+    private void StartGameWithSound()
+    {
+        PlayButtonClickSound();
+        StartGame();
+    }
+
+    private void ExitGameWithSound()
+    {
+        PlayButtonClickSound();
+        ExitGame();
+    }
+
+    private void OpenLevelSelectionWithSound()
+    {
+        PlayButtonClickSound();
+        OpenLevelSelection();
     }
 }

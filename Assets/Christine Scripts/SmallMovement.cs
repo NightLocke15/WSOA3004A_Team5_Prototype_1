@@ -6,6 +6,11 @@ public class SmallMovement : MonoBehaviour
 {
     public bool _moving;
     [SerializeField] private float speed = 3;
+private AudioSource audioSource; // Reference to the AudioSource component
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -43,9 +48,15 @@ public class SmallMovement : MonoBehaviour
         }
     }
 
-    IEnumerator Rolling(Vector3 anchor, Vector3 axis)
+   IEnumerator Rolling(Vector3 anchor, Vector3 axis)
     {
         _moving = true;
+        
+        // Play the movement sound
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.Play();
+        }
 
         for (int i = 0; i < (90 / speed); i++)
         {
@@ -55,4 +66,6 @@ public class SmallMovement : MonoBehaviour
 
         _moving = false;
     }
+
+
 }
