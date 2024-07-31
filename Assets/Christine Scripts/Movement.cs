@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region Misc
-    [SerializeField] private float speed = 3; //Speed of the block rolling
+    [SerializeField] private float speed = 4; //Speed of the block rolling
     private float currentY; //What the block Y position is in the world. Helps determine if block is upright or not
     public List<string> strings = new List<string>(); //List that contains string that tells what the previous state was, upright or not
     private string state;
@@ -27,8 +27,10 @@ public class Movement : MonoBehaviour
     public Vector2Int startTile;
      public TMP_Text moveCounterText;
       private AudioSource audioSource; // Reference to the AudioSource component
+    private bool moveDown;
+    private bool move;
 
-private int moveCounter = 0;
+    private int moveCounter = 0;
 
     #endregion
 
@@ -52,10 +54,25 @@ private int moveCounter = 0;
                if (_levelData.tiles[i].tileType == TileType.Start)
                 {
                     startTile = _levelData.tiles[i].position;
-                    transform.position = new Vector3(startTile.x, 1.1f, startTile.y);
+                    transform.position = new Vector3(startTile.x, 10.1f, startTile.y);
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
                     startLevel = false;
+                    move = false;
+                    moveDown = true;
                 }
             }
+        }
+
+        if (moveDown == true)
+        {
+            transform.position = transform.position + new Vector3(0, -1, 0) * Time.deltaTime * 20;
+        }
+
+        if (transform.position.y < 1 && moveDown == true)
+        {
+            moveDown = false;
+            transform.position = new Vector3(startTile.x, 1.1f, startTile.y);
+            move = true;
         }
 
         currentY = transform.position.y;
@@ -77,8 +94,10 @@ private int moveCounter = 0;
         }
 
         //Movement tied to WASD
+        if (move == true)
+        {        
 
-        if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
         {
             if (upright == true)
             {
@@ -151,7 +170,7 @@ private int moveCounter = 0;
             back = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D))
         {
             if (upright == true)
             {
@@ -224,7 +243,7 @@ private int moveCounter = 0;
             back = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W))
         {
             if (upright == true)
             {
@@ -296,7 +315,7 @@ private int moveCounter = 0;
             back = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
         {
             if (upright == true)
             {
@@ -366,7 +385,10 @@ private int moveCounter = 0;
             right = false;
             front = false;
             back = true;
-        }     
+        }
+
+        }
+        else { }
 
         void DirectionOne (Vector3 direction)
         {

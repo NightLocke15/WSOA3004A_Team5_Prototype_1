@@ -30,7 +30,7 @@ public class Empties : MonoBehaviour
         _levelManager = GameObject.Find("Manager").GetComponent<LevelManager>();
         HalfCube1 = GameObject.Find("Half One");
         HalfCube1 = GameObject.Find("Half Two");
-        _scriptHandler = GameObject.Find("Script Handler").GetComponent<ScriptHandler>();
+        _scriptHandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
 
     }
 
@@ -184,7 +184,7 @@ public class Empties : MonoBehaviour
             seconds += Time.deltaTime;
         }
 
-        if (seconds > 2)
+        if (seconds > 1)
         {
             timer = false;
             seconds = 0;
@@ -198,13 +198,14 @@ public class Empties : MonoBehaviour
 
         if (moveDown == true)
         {
-            playerCube.transform.position = playerCube.transform.position + new Vector3(0, -1, 0) * Time.deltaTime * 15;
+            playerCube.transform.position = playerCube.transform.position + new Vector3(0, -1, 0) * Time.deltaTime * 20;
         }
 
         if (playerCube.transform.position.y < 1 && moveDown == true)
         {
             moveDown = false;
             playerCube.transform.position = new Vector3(_movement.startTile.x, 1.1f, _movement.startTile.y);
+            _movement.enabled = true;
         }
 
         if (fallCube1 == true)
@@ -224,7 +225,7 @@ public class Empties : MonoBehaviour
             seconds2 += Time.deltaTime;
         }
 
-        if (seconds2 > 2f)
+        if (seconds2 > 1f)
         {
             timer2 = false;
             seconds2 = 0;
@@ -240,6 +241,10 @@ public class Empties : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            _movement.strings.Clear();
+            _movement.strings.Add("upright");
+            _movement.enabled = false;
+
             if (_scriptHandler.split == true)
             {
                 _scriptHandler.split = false;
@@ -290,6 +295,10 @@ public class Empties : MonoBehaviour
         }
         else if (other.gameObject.tag == "HalfCube1" || other.gameObject.tag == "HalfCube2")
         {
+            _movement.strings.Clear();
+            _movement.strings.Add("upright");
+            _movement.enabled = false;
+
             if (_scriptHandler.split == true)
             {
                 _scriptHandler.split = false;

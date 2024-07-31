@@ -15,7 +15,7 @@ public class Combination : MonoBehaviour
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
-        _scriptHandler = GameObject.Find("Script Handler").GetComponent<ScriptHandler>();
+        _scriptHandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
 
         if (soundPlayer == null)
         {
@@ -44,17 +44,16 @@ public class Combination : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "HalfCube")
+        if (other.gameObject.tag == "HalfCube1" || other.gameObject.tag == "HalfCube2")
         {
             _scriptHandler.split = false;
             PlayCombineSound(); // Play the reconnect sound before changing states
             _scriptHandler.movementCube1._moving = false;
             _scriptHandler.movementCube2._moving = false;
 
-            if (cubeOne.transform.position.z < (cubeTwo.transform.position.z - 0.2)) // forward and back
+            if (cubeOne.transform.position.z < (cubeTwo.transform.position.z - 0.2) && cubeOne.transform.position.x == cubeTwo.transform.position.x) // forward and back
             {
                 Debug.Log("front");
                 cubeOne.SetActive(false);
@@ -70,7 +69,7 @@ public class Combination : MonoBehaviour
                 _movement.left = false;
                 _movement.right = false;
             }
-            else if (cubeOne.transform.position.z > (cubeTwo.transform.position.z + 0.2))
+            else if (cubeOne.transform.position.z > (cubeTwo.transform.position.z + 0.2) && cubeOne.transform.position.x == cubeTwo.transform.position.x)
             {
                 Debug.Log("back");
                 cubeOne.SetActive(false);
@@ -86,7 +85,7 @@ public class Combination : MonoBehaviour
                 _movement.left = false;
                 _movement.right = false;
             }
-            else if (cubeOne.transform.position.x < (cubeTwo.transform.position.x - 0.2)) // left and right
+            else if (cubeOne.transform.position.x < (cubeTwo.transform.position.x - 0.2) && cubeOne.transform.position.z == cubeTwo.transform.position.z) // left and right
             {
                 Debug.Log("left");
                 cubeOne.SetActive(false);
@@ -102,7 +101,7 @@ public class Combination : MonoBehaviour
                 _movement.left = true;
                 _movement.right = false;
             }
-            else if (cubeOne.transform.position.x > (cubeTwo.transform.position.x + 0.2))
+            else if (cubeOne.transform.position.x > (cubeTwo.transform.position.x + 0.2) && cubeOne.transform.position.z == cubeTwo.transform.position.z)
             {
                 Debug.Log("right");
                 cubeOne.SetActive(false);
@@ -119,5 +118,7 @@ public class Combination : MonoBehaviour
                 _movement.right = false;
             }
         }
+
+       
     }
 }

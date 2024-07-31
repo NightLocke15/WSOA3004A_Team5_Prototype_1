@@ -26,7 +26,7 @@ public class SplitCube : MonoBehaviour
     {
         _levelManager = GameObject.Find("Manager").GetComponent<LevelManager>();
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
-        _scriptHandler = GameObject.Find("Script Handler").GetComponent<ScriptHandler>();
+        _scriptHandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
         playerCube = GameObject.Find("Player Holder");
         cubeOne = GameObject.Find("Half One");
         cubeTwo = GameObject.Find("Half Two");
@@ -35,8 +35,8 @@ public class SplitCube : MonoBehaviour
         movementCube2 = GameObject.Find("Half Two").GetComponent<SmallMovement>();
 
 
-        movementCube1.enabled = false;
-        movementCube2.enabled = false;
+        _scriptHandler.movementCube1.enabled = false;
+        _scriptHandler.movementCube2.enabled = false;
 
          audioSource = GetComponent<AudioSource>(); // Initialize the AudioSource
 
@@ -44,6 +44,7 @@ public class SplitCube : MonoBehaviour
 
     private void Update()
     {
+
         if (_scriptHandler.split == true)
         {
             movementCube1 = GameObject.Find("Half One").GetComponent<SmallMovement>();
@@ -66,25 +67,7 @@ public class SplitCube : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("space");
-
-            if (movementCube1.enabled == true)
-            {
-                movementCube1.enabled = false;
-                movementCube2.enabled = true;
-            }
-            else if (movementCube2.enabled == true)
-            {
-                movementCube2.enabled = false;
-                movementCube1.enabled = true;
-            }
-            else
-            {
-
-            }
-        }
+        
 
         if (_levelManager.currentLevelIndex == 3 || _levelManager.currentLevelIndex == 4)
         {

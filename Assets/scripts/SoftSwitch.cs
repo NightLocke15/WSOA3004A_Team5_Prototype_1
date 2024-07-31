@@ -46,7 +46,7 @@ private AudioSource audioSource; // Reference to the AudioSource component
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "HalfCube")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "HalfCube1" || other.gameObject.tag == "HalfCube2")
         {
             activate++;
              PlayActivationSound(); // Play activation sound

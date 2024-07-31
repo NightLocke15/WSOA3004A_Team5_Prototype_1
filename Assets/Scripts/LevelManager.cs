@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class LevelManager : MonoBehaviour
     public LevelData[] levels;
     public Movement _movement;
     public bool levelLoad;
+    ScriptHandler _scriptHandler;
+    [SerializeField] private GameObject playerCube;
+    public GameObject Space;
 
     public int currentLevelIndex = 0;
     public AudioClip levelStartSound; // Add a field for the level start sound
@@ -16,6 +20,9 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        _scriptHandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
+        Space.SetActive(false);
+
         // Add an AudioSource component if it doesn't exist
         if (gameObject.GetComponent<AudioSource>() == null)
         {
@@ -54,6 +61,15 @@ public class LevelManager : MonoBehaviour
         {
             SceneManager.LoadScene("EndGameScene");
         }
+
+        if (currentLevelIndex == 3)
+        {
+            Space.SetActive(true);
+        }
+        else
+        {
+            Space.SetActive(false);
+        }
     }
 
     public void level()
@@ -69,8 +85,10 @@ public class LevelManager : MonoBehaviour
         {
             tileManager.LoadLevel(levels[currentLevelIndex]);
             levelLoad = true;
+
             
-             // Play the level start sound
+
+            // Play the level start sound
             if (audioSource != null && levelStartSound != null)
             {
                 audioSource.clip = levelStartSound;
@@ -80,6 +98,21 @@ public class LevelManager : MonoBehaviour
             {
                 Debug.LogWarning("AudioSource or levelStartSound is missing.");
             }
+
+            _scriptHandler.empty1L2.SetActive(false);
+            _scriptHandler.empty2L2.SetActive(false);
+            _scriptHandler.empty3L2.SetActive(false);
+            _scriptHandler.empty4L2.SetActive(false);
+
+            _scriptHandler.empty1L5.SetActive(false);
+            _scriptHandler.empty2L5.SetActive(false);
+            _scriptHandler.empty3L5.SetActive(false);
+            _scriptHandler.empty4L5.SetActive(false);
+            _scriptHandler.empty5L5.SetActive(false);
+            _scriptHandler.empty6L5.SetActive(false);
+
+            _movement.strings.Clear();
+            _movement.strings.Add("upright");
         }
     }
 
