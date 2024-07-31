@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
+
     public GameObject solidTilePrefab;
     public GameObject emptyTilePrefab;
     public GameObject softSwitchPrefab;
@@ -19,11 +20,11 @@ public class TileManager : MonoBehaviour
 
     public float animDuration = 1.0f;
     public float maxDelay = 0.5f;
-
+    public float initialDelay = 0.6f;
+    public Vector3 hidePos = new Vector3(0, -10, 0);
 
     public void LoadLevel(LevelData levelData)
     {
-        ClearLevel();
 
         int count = 0;
         foreach (var tile in levelData.tiles)
@@ -71,33 +72,68 @@ public class TileManager : MonoBehaviour
 
             if (tilePrefab != null)
             {
-                GameObject tileInstance = Instantiate(tilePrefab, new Vector3(tile.position.x, 0, tile.position.y), Quaternion.identity, transform);
-                //StartCoroutine(StartTileAnimationWithDelay(tileInstance, maxDelay));
+                GameObject tileInstance = Instantiate(tilePrefab, new Vector3(tile.position.x, 0, tile.position.y) + hidePos, Quaternion.identity, transform);
                 tileInstance.name = $"tile{count}";
+                StartCoroutine(startDelay(tileInstance, new Vector3(tile.position.x, 0, tile.position.y), maxDelay));
             }
 
-            count++; 
+            count++;
         }
-
     }
 
-    //private IEnumerator StartTileAnimationWithDelay(GameObject tile, float maxDelay)
-    //{
-    //    float delay = Random.Range(0f, maxDelay);
-    //    yield return new WaitForSeconds(delay);
+    private IEnumerator startDelay(GameObject tile, Vector3 targetPosition, float maxDelay)
+    {
+        yield return new WaitForSeconds(initialDelay); //so that fly out and fly in don't overlap 
+        StartCoroutine(flyInAni(tile, targetPosition, maxDelay));
+    }
 
-    //    Animator animator = tile.GetComponent<Animator>();
-    //    if (animator != null)
-    //    {
-    //        animator.SetTrigger("Float"); 
-    //    }
-    //}
+    private IEnumerator flyInAni(GameObject tile, Vector3 targetPosition, float maxDelay)
+    {
+        float delay = Random.Range(0f, maxDelay);
+        yield return new WaitForSeconds(delay);
 
-    public void ClearLevel()
+        float elapsedTime = 0f;
+        Vector3 startPosition = tile.transform.position;
+
+        while (elapsedTime < animDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / animDuration;
+            tile.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+
+        // to end in the right place 
+        tile.transform.position = targetPosition;
+    }
+
+    public void FlyOutLevel()
     {
         foreach (Transform child in transform)
         {
-            Destroy(child.gameObject);
+            StartCoroutine(flyOutAni(child.gameObject));
         }
+        
+    }
+
+    private IEnumerator flyOutAni(GameObject tile)
+    {
+        float delay = Random.Range(0f, maxDelay);
+        yield return new WaitForSeconds(delay);
+
+        float elapsedTime = 0f;
+        Vector3 startPosition = tile.transform.position;
+        Vector3 targetPosition = startPosition + hidePos;
+
+        while (elapsedTime < animDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / animDuration;
+            tile.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+        tile.transform.position = targetPosition;
+
+        Destroy(tile);
     }
 }

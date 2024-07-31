@@ -52,6 +52,8 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        tileManager.FlyOutLevel();
+
         currentLevelIndex++;
         if (currentLevelIndex < levels.Length)
         {

@@ -3,7 +3,19 @@ guid: 296aaced565b3f14299173318db58057
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - solidTilePrefab: {instanceID: 0}
+  - emptyTilePrefab: {fileID: 7402088969407376016, guid: 10e5a804c3448cc4e9e268c11cb1f75d, type: 3}
+  - softSwitchPrefab: {instanceID: 0}
+  - hardSwitchPrefab: {instanceID: 0}
+  - orangeTilePrefab: {instanceID: 0}
+  - split1TilePrefab: {instanceID: 0}
+  - split2TilePrefab: {instanceID: 0}
+  - startTilePrefab: {fileID: 4008376173587073472, guid: 7d46c4ced97ad124bafa83307601ec84, type: 3}
+  - goalTilePrefab: {fileID: 7402088969407376016, guid: 10e5a804c3448cc4e9e268c11cb1f75d, type: 3}
+  - softTilePrefab: {instanceID: 0}
+  - hardTilePrefab: {instanceID: 0}
+  - splitSwitchPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
