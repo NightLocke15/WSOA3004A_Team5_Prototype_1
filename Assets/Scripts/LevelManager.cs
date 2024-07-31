@@ -32,6 +32,11 @@ public class LevelManager : MonoBehaviour
             Debug.Log("working2");
             _movement.startLevel = true;
         }
+
+        if (currentLevelIndex > 4)
+        {
+            SceneManager.LoadScene("EndGameScene");
+        }
     }
 
     public void level()
