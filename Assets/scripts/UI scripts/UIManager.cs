@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public Button levelsButton;
     public GameObject levelSelectionPanel;
     public AudioClip buttonClickSound; // The sound to play on button click
+    public string gameSceneName = "MainScene"; // The name of the game scene
 
     private Button[] levelButtons;
     private AudioSource audioSource;
@@ -70,11 +71,12 @@ public class UIManager : MonoBehaviour
         levelButtons = levelSelectionPanel.GetComponentsInChildren<Button>();
 
         // Add debug logs and listeners for level buttons
-        foreach (var button in levelButtons)
+        for (int i = 0; i < levelButtons.Length; i++)
         {
-            button.onClick.AddListener(() => Debug.Log(button.name + " clicked"));
-            button.onClick.AddListener(() => LoadLevel(button.name)); // Assuming button name is the level name
-            button.onClick.AddListener(PlayButtonClickSound); // Add sound listener
+            int levelIndex = i;
+            levelButtons[i].onClick.AddListener(() => Debug.Log("Loading level: " + levelIndex));
+            levelButtons[i].onClick.AddListener(() => SetLevelIndexAndLoad(levelIndex));
+            levelButtons[i].onClick.AddListener(PlayButtonClickSound); // Add sound listener
         }
     }
 
@@ -86,9 +88,9 @@ public class UIManager : MonoBehaviour
 
     private void StartGame()
     {
-        // Load the game scene, replace "GameScene" with your scene name
+        // Load the game scene
         Debug.Log("Starting game");
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene(gameSceneName);
     }
 
     private void ExitGame()
@@ -98,11 +100,10 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
-    private void LoadLevel(string levelName)
+    private void SetLevelIndexAndLoad(int levelIndex)
     {
-        // Load the selected level scene
-        Debug.Log("Loading level: " + levelName);
-        SceneManager.LoadScene(levelName);
+        PlayerPrefs.SetInt("SelectedLevelIndex", levelIndex); // Save the level index
+        SceneManager.LoadScene(gameSceneName); // Load the game scene
     }
 
     private void PlayButtonClickSound()

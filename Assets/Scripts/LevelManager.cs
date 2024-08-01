@@ -18,12 +18,16 @@ public class LevelManager : MonoBehaviour
     public int currentLevelIndex = 0;
     public AudioClip levelStartSound; // Add a field for the level start sound
     private AudioSource audioSource; // Reference to the AudioSource component
+    public TMP_Text levelText; // Reference to the TMP_Text component that displays the level number
 
     void Start()
     {
         _scriptHandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
         Space.SetActive(false);
 
+        // Retrieve the level index from PlayerPrefs
+    currentLevelIndex = PlayerPrefs.GetInt("SelectedLevelIndex", 0);
+    
         // Add an AudioSource component if it doesn't exist
         if (gameObject.GetComponent<AudioSource>() == null)
         {
@@ -125,6 +129,8 @@ public class LevelManager : MonoBehaviour
 
             _movement.strings.Clear();
             _movement.strings.Add("upright");
+            // Update the level text
+            UpdateLevelText();
         }
     }
 
@@ -135,6 +141,14 @@ public class LevelManager : MonoBehaviour
         if (currentLevelIndex < levels.Length)
         {
             LoadCurrentLevel();
+        }
+    }
+
+    private void UpdateLevelText()
+    {
+        if (levelText != null)
+        {
+            levelText.text = "Level: " + (currentLevelIndex + 1);
         }
     }
 }
