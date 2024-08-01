@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,9 +14,13 @@ public class LevelManager : MonoBehaviour
     public int currentLevelIndex = 0;
     public AudioClip levelStartSound; // Add a field for the level start sound
     private AudioSource audioSource; // Reference to the AudioSource component
+    public TMP_Text levelText; // Reference to the TMP_Text component that displays the level number
 
     void Start()
     {
+        // Retrieve the level index from PlayerPrefs
+    currentLevelIndex = PlayerPrefs.GetInt("SelectedLevelIndex", 0);
+    
         // Add an AudioSource component if it doesn't exist
         if (gameObject.GetComponent<AudioSource>() == null)
         {
@@ -65,7 +70,7 @@ public class LevelManager : MonoBehaviour
             tileManager.LoadLevel(levels[currentLevelIndex]);
             levelLoad = true;
             
-             // Play the level start sound
+            // Play the level start sound
             if (audioSource != null && levelStartSound != null)
             {
                 audioSource.clip = levelStartSound;
@@ -75,6 +80,9 @@ public class LevelManager : MonoBehaviour
             {
                 Debug.LogWarning("AudioSource or levelStartSound is missing.");
             }
+
+            // Update the level text
+            UpdateLevelText();
         }
     }
 
@@ -84,6 +92,14 @@ public class LevelManager : MonoBehaviour
         if (currentLevelIndex < levels.Length)
         {
             LoadCurrentLevel();
+        }
+    }
+
+    private void UpdateLevelText()
+    {
+        if (levelText != null)
+        {
+            levelText.text = "Level: " + (currentLevelIndex + 1);
         }
     }
 }

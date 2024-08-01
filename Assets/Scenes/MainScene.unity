@@ -1544,6 +1544,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1090250531}
     - target: {fileID: 3777616875828166410, guid: 2cc6e92e687132e459a44842f4d20772, type: 3}
+      propertyPath: levelText
+      value: 
+      objectReference: {fileID: 1081417716}
+    - target: {fileID: 3777616875828166410, guid: 2cc6e92e687132e459a44842f4d20772, type: 3}
       propertyPath: levelStartSound
       value: 
       objectReference: {fileID: 8300000, guid: 97ff2c0b3ed11f74db576394c4f817db, type: 3}
@@ -2511,6 +2515,10 @@ PrefabInstance:
       propertyPath: moveCounterText
       value: 
       objectReference: {fileID: 453041393}
+    - target: {fileID: 198147348593917089, guid: 16f8155cd6880944a92ecb1670d1126d, type: 3}
+      propertyPath: levelDisplayText
+      value: 
+      objectReference: {fileID: 1081417716}
     - target: {fileID: 198147348593917094, guid: 16f8155cd6880944a92ecb1670d1126d, type: 3}
       propertyPath: m_RootOrder
       value: 5
