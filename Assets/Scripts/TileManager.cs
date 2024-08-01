@@ -22,6 +22,7 @@ public class TileManager : MonoBehaviour
     public float maxDelay = 0.5f;
     public float initialDelay = 0.6f;
     public Vector3 hidePos = new Vector3(0, -10, 0);
+    public List<GameObject> tiles = new List<GameObject>();
 
     public void LoadLevel(LevelData levelData)
     {
@@ -105,6 +106,7 @@ public class TileManager : MonoBehaviour
 
         // to end in the right place 
         tile.transform.position = targetPosition;
+        tiles.Add(tile);
     }
 
     public void FlyOutLevel()
@@ -134,6 +136,6 @@ public class TileManager : MonoBehaviour
         }
         tile.transform.position = targetPosition;
 
-        Destroy(tile);
+        //Destroy(tile);
     }
 }

@@ -30,6 +30,9 @@ public class Movement : MonoBehaviour
     private bool moveDown;
     private bool move;
 
+    private bool timer = false;
+    private float seconds = 0;
+
     private int moveCounter = 0;
 
     #endregion
@@ -58,9 +61,22 @@ public class Movement : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     startLevel = false;
                     move = false;
-                    moveDown = true;
+                    timer = true;
+                   // moveDown = true;
                 }
             }
+        }
+
+        if (timer == true)
+        {
+            seconds += Time.deltaTime;
+        }
+
+        if (seconds > 2)
+        {
+            timer = false;
+            seconds = 0;
+            moveDown = true;
         }
 
         if (moveDown == true)

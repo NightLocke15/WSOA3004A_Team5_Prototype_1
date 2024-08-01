@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     ScriptHandler _scriptHandler;
     [SerializeField] private GameObject playerCube;
     public GameObject Space;
+    public TextMeshProUGUI levelNum;
 
     public int currentLevelIndex = 0;
     public AudioClip levelStartSound; // Add a field for the level start sound
@@ -70,6 +71,8 @@ public class LevelManager : MonoBehaviour
         {
             Space.SetActive(false);
         }
+
+        levelNum.text = "Level: " + (currentLevelIndex + 1);
     }
 
     public void level()
@@ -118,6 +121,15 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        if (tileManager.tiles.Count > 0)
+        {
+            for (int i = 0; i < tileManager.tiles.Count; i++)
+            {
+                Destroy(tileManager.tiles[i]);
+            }
+            tileManager.tiles.Clear();
+        }
+
         tileManager.FlyOutLevel();
 
         currentLevelIndex++;
