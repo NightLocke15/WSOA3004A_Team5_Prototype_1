@@ -84,6 +84,15 @@ public class LevelManager : MonoBehaviour
 
     public void LoadCurrentLevel()
     {
+        if (tileManager.tiles.Count > 0)
+            {
+                for (int i = 0; i < tileManager.tiles.Count; i++)
+                {
+                    Destroy(tileManager.tiles[i]);
+                }
+                tileManager.tiles.Clear();
+            }
+
         if (currentLevelIndex >= 0 && currentLevelIndex < levels.Length)
         {
             tileManager.LoadLevel(levels[currentLevelIndex]);
@@ -121,17 +130,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        if (tileManager.tiles.Count > 0)
-        {
-            for (int i = 0; i < tileManager.tiles.Count; i++)
-            {
-                Destroy(tileManager.tiles[i]);
-            }
-            tileManager.tiles.Clear();
-        }
-
-        tileManager.FlyOutLevel();
-
+        //tileManager.FlyOutLevel();
         currentLevelIndex++;
         if (currentLevelIndex < levels.Length)
         {

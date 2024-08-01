@@ -74,7 +74,7 @@ public class Goal : MonoBehaviour
             seconds += Time.deltaTime;
         }
 
-        if (seconds > 2)
+        if (seconds > 0.5)
         {
             levelManager.level();
             timer = false;

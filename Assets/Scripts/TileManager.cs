@@ -115,7 +115,7 @@ public class TileManager : MonoBehaviour
         {
             StartCoroutine(flyOutAni(child.gameObject));
         }
-        
+
     }
 
     private IEnumerator flyOutAni(GameObject tile)
@@ -135,7 +135,5 @@ public class TileManager : MonoBehaviour
             yield return null;
         }
         tile.transform.position = targetPosition;
-
-        //Destroy(tile);
     }
 }
