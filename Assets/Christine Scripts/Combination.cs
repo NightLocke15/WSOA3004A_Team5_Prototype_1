@@ -49,12 +49,13 @@ public class Combination : MonoBehaviour
         if (other.gameObject.tag == "HalfCube1" || other.gameObject.tag == "HalfCube2")
         {
             _scriptHandler.split = false;
-            PlayCombineSound(); // Play the reconnect sound before changing states
+            
             _scriptHandler.movementCube1._moving = false;
             _scriptHandler.movementCube2._moving = false;
 
             if (cubeOne.transform.position.z < (cubeTwo.transform.position.z - 0.2) && cubeOne.transform.position.x == cubeTwo.transform.position.x) // forward and back
             {
+                PlayCombineSound(); // Play the reconnect sound before changing states
                 Debug.Log("front");
                 cubeOne.SetActive(false);
                 cubeTwo.SetActive(false);
@@ -71,6 +72,7 @@ public class Combination : MonoBehaviour
             }
             else if (cubeOne.transform.position.z > (cubeTwo.transform.position.z + 0.2) && cubeOne.transform.position.x == cubeTwo.transform.position.x)
             {
+                PlayCombineSound(); // Play the reconnect sound before changing states
                 Debug.Log("back");
                 cubeOne.SetActive(false);
                 cubeTwo.SetActive(false);
@@ -87,6 +89,7 @@ public class Combination : MonoBehaviour
             }
             else if (cubeOne.transform.position.x < (cubeTwo.transform.position.x - 0.2) && cubeOne.transform.position.z == cubeTwo.transform.position.z) // left and right
             {
+                PlayCombineSound(); // Play the reconnect sound before changing states
                 Debug.Log("left");
                 cubeOne.SetActive(false);
                 cubeTwo.SetActive(false);
@@ -103,6 +106,7 @@ public class Combination : MonoBehaviour
             }
             else if (cubeOne.transform.position.x > (cubeTwo.transform.position.x + 0.2) && cubeOne.transform.position.z == cubeTwo.transform.position.z)
             {
+                PlayCombineSound(); // Play the reconnect sound before changing states
                 Debug.Log("right");
                 cubeOne.SetActive(false);
                 cubeTwo.SetActive(false);

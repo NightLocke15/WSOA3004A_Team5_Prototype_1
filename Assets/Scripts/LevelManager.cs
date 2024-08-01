@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
         Space.SetActive(false);
 
         // Retrieve the level index from PlayerPrefs
-    currentLevelIndex = PlayerPrefs.GetInt("SelectedLevelIndex", 0);
+        currentLevelIndex = PlayerPrefs.GetInt("SelectedLevelIndex", 0);
     
         // Add an AudioSource component if it doesn't exist
         if (gameObject.GetComponent<AudioSource>() == null)
