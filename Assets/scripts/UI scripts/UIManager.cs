@@ -152,6 +152,8 @@ public class UIManager : MonoBehaviour
     private void OpenRulesScene()
     {
         Debug.Log("Opening rules scene");
+        
+        PlayButtonClickSound();
         SceneManager.LoadScene(rulesSceneName);
     }
 }
