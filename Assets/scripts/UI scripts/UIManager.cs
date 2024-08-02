@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
     {
         // Load the game scene
         Debug.Log("Starting game");
-        
+         SetLevelIndexAndLoad(0);
         SceneManager.LoadScene(gameSceneName);
     }
 
