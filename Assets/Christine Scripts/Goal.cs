@@ -20,6 +20,7 @@ public class Goal : MonoBehaviour
     [SerializeField] private GameObject playerCube;
     SoftSwitch softSwitch;
     HardSwitch hardSwitch;
+    ScriptHandler _scriptHandler;
 
     public AudioClip goalSound; // Add a field for the goal sound
     private AudioSource audioSource; // Reference to the AudioSource component
@@ -29,6 +30,7 @@ public class Goal : MonoBehaviour
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
         tileManager = GameObject.Find("Manager").GetComponent<TileManager>();
         levelManager = GameObject.Find("Manager").GetComponent<LevelManager>();
+        _scriptHandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
         playerCube = GameObject.Find("Player Holder");
 
         // Add an AudioSource component if it doesn't exist
@@ -98,8 +100,23 @@ public class Goal : MonoBehaviour
 
             timer = true;
             moveDown = true;
-            softSwitch.switches.Clear();
-            hardSwitch.switches.Clear();
+            for (int j = 0; j < _levelData.tiles.Length; j++)
+            {
+                if (_levelData.tiles[j].tileType.Equals(TileType.Soft))
+                {
+                    softSwitch.switches.Clear();
+                }
+            }
+
+            for (int j = 0; j < _levelData.tiles.Length; j++)
+            {
+                if (_levelData.tiles[j].tileType.Equals(TileType.Hard))
+                {
+                    hardSwitch.switches.Clear();
+                }
+            }
+
+            
         }
     }
 }

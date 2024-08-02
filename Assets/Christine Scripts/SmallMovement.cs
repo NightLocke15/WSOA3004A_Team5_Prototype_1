@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SmallMovement : MonoBehaviour
 {
-    private bool _moving;
+    public bool _moving;
     [SerializeField] private float speed = 3;
 private AudioSource audioSource; // Reference to the AudioSource component
     private void Start()

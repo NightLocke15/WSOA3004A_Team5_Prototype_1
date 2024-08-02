@@ -36,7 +36,7 @@ MonoBehaviour:
   - position: {x: 10, y: 0}
     tileType: 0
   - position: {x: 11, y: 0}
-    tileType: 7
+    tileType: 3
   - position: {x: 12, y: 0}
     tileType: 0
   - position: {x: 13, y: 0}
@@ -202,7 +202,7 @@ MonoBehaviour:
   - position: {x: 9, y: 6}
     tileType: 0
   - position: {x: 10, y: 6}
-    tileType: 0
+    tileType: 5
   - position: {x: 11, y: 6}
     tileType: 0
   - position: {x: 12, y: 6}
@@ -256,13 +256,13 @@ MonoBehaviour:
   - position: {x: 8, y: 8}
     tileType: 0
   - position: {x: 9, y: 8}
-    tileType: 6
+    tileType: 7
   - position: {x: 10, y: 8}
-    tileType: 0
+    tileType: 6
   - position: {x: 11, y: 8}
-    tileType: 0
+    tileType: 11
   - position: {x: 12, y: 8}
-    tileType: 5
+    tileType: 0
   - position: {x: 13, y: 8}
     tileType: 0
   - position: {x: 0, y: 9}

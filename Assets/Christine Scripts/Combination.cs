@@ -10,10 +10,12 @@ public class Combination : MonoBehaviour
     Movement _movement;
      public AudioClip combineSound; // Audio clip for the combination sound
     public GameObject soundPlayer; // Reference to the GameObject that will play the soun
+    ScriptHandler _scriptHandler;
 
     private void Start()
     {
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
+        _scriptHandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
 
         if (soundPlayer == null)
         {
@@ -42,15 +44,18 @@ public class Combination : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "HalfCube")
+        if (other.gameObject.tag == "HalfCube1" || other.gameObject.tag == "HalfCube2")
         {
-            PlayCombineSound(); // Play the reconnect sound before changing states
+            _scriptHandler.split = false;
+            
+            _scriptHandler.movementCube1._moving = false;
+            _scriptHandler.movementCube2._moving = false;
 
-            if (cubeOne.transform.position.z < (cubeTwo.transform.position.z - 0.2)) // forward and back
+            if (cubeOne.transform.position.z < (cubeTwo.transform.position.z - 0.2) && cubeOne.transform.position.x == cubeTwo.transform.position.x) // forward and back
             {
+                PlayCombineSound(); // Play the reconnect sound before changing states
                 Debug.Log("front");
                 cubeOne.SetActive(false);
                 cubeTwo.SetActive(false);
@@ -65,8 +70,9 @@ public class Combination : MonoBehaviour
                 _movement.left = false;
                 _movement.right = false;
             }
-            else if (cubeOne.transform.position.z > (cubeTwo.transform.position.z + 0.2))
+            else if (cubeOne.transform.position.z > (cubeTwo.transform.position.z + 0.2) && cubeOne.transform.position.x == cubeTwo.transform.position.x)
             {
+                PlayCombineSound(); // Play the reconnect sound before changing states
                 Debug.Log("back");
                 cubeOne.SetActive(false);
                 cubeTwo.SetActive(false);
@@ -81,8 +87,9 @@ public class Combination : MonoBehaviour
                 _movement.left = false;
                 _movement.right = false;
             }
-            else if (cubeOne.transform.position.x < (cubeTwo.transform.position.x - 0.2)) // left and right
+            else if (cubeOne.transform.position.x < (cubeTwo.transform.position.x - 0.2) && cubeOne.transform.position.z == cubeTwo.transform.position.z) // left and right
             {
+                PlayCombineSound(); // Play the reconnect sound before changing states
                 Debug.Log("left");
                 cubeOne.SetActive(false);
                 cubeTwo.SetActive(false);
@@ -97,8 +104,9 @@ public class Combination : MonoBehaviour
                 _movement.left = true;
                 _movement.right = false;
             }
-            else if (cubeOne.transform.position.x > (cubeTwo.transform.position.x + 0.2))
+            else if (cubeOne.transform.position.x > (cubeTwo.transform.position.x + 0.2) && cubeOne.transform.position.z == cubeTwo.transform.position.z)
             {
+                PlayCombineSound(); // Play the reconnect sound before changing states
                 Debug.Log("right");
                 cubeOne.SetActive(false);
                 cubeTwo.SetActive(false);
@@ -114,5 +122,7 @@ public class Combination : MonoBehaviour
                 _movement.right = false;
             }
         }
+
+       
     }
 }

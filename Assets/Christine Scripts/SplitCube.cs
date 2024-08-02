@@ -13,6 +13,7 @@ public class SplitCube : MonoBehaviour
     public GameObject playerCube;
     public ParticleSystem splitParticle;
     public Vector2Int splitTile;
+    
 
     public SmallMovement movementCube1;
     public SmallMovement movementCube2;
@@ -25,7 +26,7 @@ public class SplitCube : MonoBehaviour
     {
         _levelManager = GameObject.Find("Manager").GetComponent<LevelManager>();
         _movement = GameObject.Find("Player Holder").GetComponent<Movement>();
-        _scriptHandler = GameObject.Find("Script Handler").GetComponent<ScriptHandler>();
+        _scriptHandler = GameObject.Find("Script Handler Variant").GetComponent<ScriptHandler>();
         playerCube = GameObject.Find("Player Holder");
         cubeOne = GameObject.Find("Half One");
         cubeTwo = GameObject.Find("Half Two");
@@ -33,8 +34,9 @@ public class SplitCube : MonoBehaviour
         movementCube1 = GameObject.Find("Half One").GetComponent<SmallMovement>();
         movementCube2 = GameObject.Find("Half Two").GetComponent<SmallMovement>();
 
-        movementCube1.enabled = false;
-        movementCube2.enabled = false;
+
+        _scriptHandler.movementCube1.enabled = false;
+        _scriptHandler.movementCube2.enabled = false;
 
          audioSource = GetComponent<AudioSource>(); // Initialize the AudioSource
 
@@ -42,6 +44,14 @@ public class SplitCube : MonoBehaviour
 
     private void Update()
     {
+
+        if (_scriptHandler.split == true)
+        {
+            movementCube1 = GameObject.Find("Half One").GetComponent<SmallMovement>();
+            movementCube2 = GameObject.Find("Half Two").GetComponent<SmallMovement>();
+        }
+        else { }
+
         _levelData = _levelManager.levels[_levelManager.currentLevelIndex];
 
         if (_movement.startLevel == true)
@@ -57,27 +67,9 @@ public class SplitCube : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("space");
+        
 
-            if (movementCube1.enabled == true)
-            {
-                movementCube1.enabled = false;
-                movementCube2.enabled = true;
-            }
-            else if (movementCube2.enabled == true)
-            {
-                movementCube2.enabled = false;
-                movementCube1.enabled = true;
-            }
-            else
-            {
-
-            }
-        }
-
-        if (_levelManager.currentLevelIndex == 3)
+        if (_levelManager.currentLevelIndex == 3 || _levelManager.currentLevelIndex == 4)
         {
             for (int i = 0; i < _levelData.tiles.Length; i++)
             {
@@ -100,23 +92,31 @@ public class SplitCube : MonoBehaviour
         {
             Debug.Log("Yes");
             playerCube.SetActive(false);
-            cubeOne.SetActive(true);
-            cubeTwo.SetActive(true);
+            _scriptHandler.cubeOne.SetActive(true);
+            _scriptHandler.cubeTwo.SetActive(true);
+
+            _scriptHandler.split = true;
 
             float xT1 = Mathf.Round(Tile1.transform.position.x * 2f) / 2f;
             float zT1 = Mathf.Round(Tile1.transform.position.z * 2f) / 2f;
             float xT2 = Mathf.Round(Tile2.transform.position.x * 2f) / 2f;
             float zT2 = Mathf.Round(Tile2.transform.position.z * 2f) / 2f;
 
-            cubeOne.transform.position = new Vector3(xT1, 0.6f, zT1);
-            cubeTwo.transform.position = new Vector3(xT2, 0.6f, zT2);
+            _scriptHandler.cubeOne.transform.position = new Vector3(xT1, 0.6f, zT1);
+            _scriptHandler.cubeOne.transform.rotation = Quaternion.Euler(0, 0, 0);
+            _scriptHandler.cubeTwo.transform.position = new Vector3(xT2, 0.6f, zT2);
+            _scriptHandler.cubeTwo.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             _scriptHandler.movementCube1.enabled = true;
+            _scriptHandler.movementCube2.enabled = false;
             // Play the split sound
             if (audioSource != null)
             {
                 audioSource.Play();
             }
+
+            movementCube1._moving = false;
+            movementCube2._moving = false;
 
             splitParticle.Play();
         }

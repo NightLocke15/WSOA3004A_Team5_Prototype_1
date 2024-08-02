@@ -9,6 +9,8 @@ TagManager:
   - OrangeTile
   - O
   - X
+  - HalfCube1
+  - HalfCube2
   layers:
   - Default
   - TransparentFX
