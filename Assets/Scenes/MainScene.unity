@@ -2036,9 +2036,6 @@ PrefabInstance:
       propertyPath: playerCube
       value: 
       objectReference: {fileID: 1090250530}
-      propertyPath: levelText
-      value: 
-      objectReference: {fileID: 1081417716}
     - target: {fileID: 3777616875828166410, guid: 2cc6e92e687132e459a44842f4d20772, type: 3}
       propertyPath: levelStartSound
       value: 
@@ -3903,6 +3900,18 @@ PrefabInstance:
     - target: {fileID: 8373749142182585022, guid: cc42ae220cdfb42468cc954eb874babf, type: 3}
       propertyPath: m_TagString
       value: HalfCube1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373749142182585023, guid: cc42ae220cdfb42468cc954eb874babf, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373749142182585023, guid: cc42ae220cdfb42468cc954eb874babf, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373749142182585023, guid: cc42ae220cdfb42468cc954eb874babf, type: 3}
+      propertyPath: m_Size.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8628922888924715456, guid: cc42ae220cdfb42468cc954eb874babf, type: 3}
       propertyPath: cubeTwo

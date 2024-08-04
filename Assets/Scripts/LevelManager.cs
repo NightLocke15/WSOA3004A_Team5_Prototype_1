@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        /*if (Input.GetKeyDown(KeyCode.R))
         {
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
@@ -60,7 +60,7 @@ public class LevelManager : MonoBehaviour
             LoadNextLevel(); 
             Debug.Log("working2");
             _movement.startLevel = true;
-        }
+        }*/
 
         if (currentLevelIndex > 4)
         {
